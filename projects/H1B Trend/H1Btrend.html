@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>H-1B Trends from 2007 to 2017</title>
+    <link rel="stylesheet" href="styletrend.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+       integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+       crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+     integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+     crossorigin="">
+    </script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://kit.fontawesome.com/bbfb57a81a.js"></script>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0"></script>
+
+  </head>
+  <body>
+    <div id="head"></div>
+    <header>
+      <div>
+        <a href="#calltoaction"><img class="fologo" src="photo/logo.png"></img></a>
+      </div>
+    </header>
+    <h6 id="credit">Photo by <a href="https://unsplash.com/@plushdesignstudio?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Plush Design Studio</a> on <a href="https://unsplash.com/search/photos/papers?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></h6>
+    <h1>Visualize H1-B Visa Trends from 2007 to 2017</h1> 
+
+    <article>
+      <section class="text">
+        <p>The H1-B is one of the most popular non-immigrant work visas for international students to the U.S. If you are a prospective or are currently an international student, chances are that you will come across people talking about or applying for this visa or you will one day need to get one yourself. In any of these cases, understanding the H-1B and the work it will take to find prospective employers willing to sponsor you to stay is tought yet critical.</p>
+        <p>Policies revolving around the visa have been changing and can affect applicants' chances of getting the visa. Explore the trends of the H-1B in the last decade from 2007 to 2017, the latest year for which US government data is available, with visualizations made based on data from <a href="https://www.uscis.gov/sites/default/files/USCIS/Resources/Reports%20and%20Studies/Immigration%20Forms%20Data/BAHA/h-1b-2007-2017-trend-tables.pdf">U.S. Citizenship and Immigration Services</a>, the agency responsible for managing the process of applying for H-1B visas.</p>
+        <h3 id="calltoaction">Click on any the categories to go to the according visual!</h3>
+      </section>
+
+      <div id="choices">
+        <a href="#leaflet"><button class ="button">Country of Origin</button></a>
+        <a href="#bar" ><button class ="button">Annual Salary</button></a><br>
+        <a href="#bar3"><button class ="button">Field of work</button></a>
+        <a href="#line2"><button class ="button">Degree Type</button></a>
+        <a href="#line"><button class ="button">Filings & Approvals</button></a>
+      </div>
+
+      <div id="line"></div>
+      <section>
+        <h2 class="charttitle">H-1B petitions filings and approvals from 2007 to 2017</h2>
+        <div class="chart" id="linechart"></div>
+        <section class="text">
+          <p>The number of approved H-1B visas saw a dip in 2017 despite the high number of petitions that same year. The USCIS has not yet publicly released numbers for 2018 and 2019. The dramatic decrease comes in the wake of President Trump's <a href="https://www.uscis.gov/legal-resources/buy-american-hire-american-putting-american-workers-first">Buy American, Hire American</a> executive order aiming to enable higher wages and employment rates for U.S. workers by enforcing and administering stricter immigration laws, the order specifically directs the Department of Homeland Security to "ensure H-1B visas are awarded to the most-skilled or highest-paid beneficiaries."</p>
+        </section>
+      </section>
+
+      <div id="pie"></div>
+      <section>
+        <h2 class="charttitle">2017 H1-B Petitions by Age Groups</h2>
+        <div class="chart" id="piechart"></div>
+      </section>
+
+      <div id="bar"></div>
+      <section>
+        <h2 class="charttitle">H-1B petitions by Anual Compensation 2017 and Average Compensation in 2007 and 2017</h2>
+        <div class="chart" id="barchart"></div>
+        <section class="text">
+          <p>The average compensation between 50,000 and 74,999 is the highest number in 2007 and 2017. In general, as competitions for the H-1B rises, there are more petitions with higher compensation in 2017 than in 2007.</p>
+        </section>
+      </section>
+
+      <div id="line2"></div>
+      <section>
+        <h2 class="charttitle">H-1B petitions by Degree</h2>
+        <div class="chart" id="linechart2"></div>
+        <section class="text">
+          <p>In 2017, <a href="https://www.uscis.gov/news/news-releases/dhs-announces-final-rule-a-more-effective-and-efficient-h-1b-visa-program">USCIS announced</a> a final rule that reverses the order by which H-1B petitions under the H-1B regular cap and the advanced degree exemption are selected. According to the agency, as a result of this rule, workers with a U.S. master’s or higher degree will have a greater chance of selection in the H-1B lottery.</p>
+          <p>The same year saw more petitions from master's degree holder than from bachelor degree holders. These are also the most common degrees held by H-1B applicants. Overall, applications of individuals with either a bachelor degree or a master's degree outnumber petitions from people holding a doctorate degree or a professional degree.</p>
+        </section>
+      </section>
+
+<!-- Bar chart 2 is the same? -->
+      <!-- <section>
+        <h2>H-1B Petitions Average Compensation from 2007 to 2017</h2>
+        <div id="barchart2"></div>
+      </section> -->
+
+      <div id="bar3"></div>
+      <section>
+        <h2 class="charttitle">H-1B petitions by Occupation</h2>
+        <div class="chart" id="barchart3"></div>
+        <section class="text">
+          <p>drawfs those other majors </p>
+        </section>
+      </section>
+
+      <div id="leaflet"></div>
+      <section>
+        <h2 class="charttitle">H-1B petitions by Country of Origin 2017</h2>
+        <div class="chart" id="map"></div>
+        <section class="text">
+          <p>Among international students in the U.S., China is the number 1 country of origin, constituting nearly 33% of the total international students in the U.S. in the 2016/2017 academic year, followed closely by India's 17%, according to an <a href="https://www.iie.org/Research-and-Insights/Open-Doors/Data/International-Students/Places-of-Origin">Open Doors report</a>.</p>
+          <p>From 2007 to 2017, India consitently ranked as the number 1 country of origin of H-1B petitions. In 2017, three in four approved H-1B petitions belongs to Indian nationals while nearly one in ten approved petitions go to Chinese nationals, the second highest group of H-1B recipient.</p>
+        </section>
+      </section>
+
+    </article>
+
+    <section class="footer">
+      <footer>
+        <div class="footerText">
+            <p>Did you enjoy this project? <span class="bold">Spread the word.</span><p>
+          <div class="social">
+              <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+              <div class="fb-like" data-href="https://foreignobserver.github.io" data-width="" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+          </div>
+
+          <p class="uppercase"><span class="red">Xplore</span> more on our site</p>
+          <div class="gridcontainer">
+            <div><img class="teasePhoto" src="photo/paper.png"></div>
+            <div><img class="teasePhoto" src="photo/bostonBackground.jpg"></div>
+            <div>So you think you know the H1B? Quiz</div>
+            <div>Find your ideal neighborhood in Boston</div>
+          </div>
+          <img class="fologo" src="photo/logo.png">
+        </div>
+      </footer>
+      <p id="definition">Xplore is a project by the <a href="https://www.foreignobserver.net">Foreign Observer</a> magazine that explores issues and trends affecting international students through data.</p>
+    </section>
+
+    <script src="js/Leaflet.Sleep.js"></script>
+    <script src="js/d3pie.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/linechart.js"></script>
+    <script src="js/pie.js"></script>
+    <script src="js/barchart.js"></script>
+    <script src="js/linechart2.js"></script>
+    <script src="js/barchart3.js"></script>
+    <script src="js/map.js"></script>
+
+  </body>
+</html>

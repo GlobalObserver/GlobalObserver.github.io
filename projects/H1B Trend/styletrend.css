@@ -1,0 +1,179 @@
+@import url('https://fonts.googleapis.com/css?family=Crimson+Pro&display=swap');
+
+h1 {
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  color: #b50418;
+  font-family: "Crimson Pro", sans-serif;
+  font-size: 50px;
+}
+
+.charttitle {
+  width: 80%;
+  margin-top: 5%;
+  margin-right: 10%;
+  margin-left: 10%;
+  text-align: center;
+  padding-bottom: 1%;
+  padding-top: 1%;
+  font-family: "Crimson Pro", sans-serif;
+  font-size: 28px;
+  background-color: #b50418;
+  color: white;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.4rem;
+  z-index: 1;
+}
+
+a {
+  color: black;
+}
+
+p a {
+  color: #b50418;
+  text-decoration: none;
+}
+
+a:hover {
+  color: black;
+}
+
+footer {
+  background-color: #F0F0F0;
+  margin-top: 4%;
+  padding-top: 3%;
+  /* background-color: #ffffe6; */
+}
+
+.chart {
+  text-align: center;
+}
+
+.text {
+  width: 40%;
+  margin-right: 30%;
+  margin-left: 30%;
+  font-size: 18px;
+  line-height: 2em;
+}
+
+.button {
+  height: 190px;
+  width: 190px;
+  background-color: #ffd700;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 3%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px;
+  margin: 4px 2px;
+  border-radius: 50%;
+}
+
+.button:hover {
+  background-color: #ff9933;
+  height: 200px;
+  width: 200px;
+}
+
+.gridcontainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 150px;
+  column-gap: 15px;
+  row-gap: 1em;
+}
+
+.teasePhoto {
+  width: 275px;
+  height: 150px;
+  border-radius: 3%;
+}
+
+.footerText {
+  width: 40%;
+  margin-left: 30%;
+  margin-right: 30%;
+  text-align: center;
+  font-size: 22px;
+  font-family: "Crimson Pro", sans-serif;
+  line-height: 2rem;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.uppercase {
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-top: 5%;
+  padding-bottom: 3%;
+}
+
+}
+.red {
+  color: #b50418;
+}
+
+.twitter-share-button {
+  vertical-align: text-bottom !important;
+}
+
+
+#map {
+  height: 700px;
+  width: 1400px;
+}
+
+#head {
+  background-image: url("photo/coverpic.jpg");
+  text-align: center;
+  width: 100%;
+  height: 400px;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#credit {
+  font-size: 12px;
+  text-align: right;
+  margin-top: -2%;
+  padding-right: 1%;
+}
+
+#choices {
+  text-align: center;
+  padding-top: 5%;
+  padding-bottom: 8%;
+}
+
+.fologo {
+  width: 200px;
+}
+
+#calltoaction {
+  padding-top: 3%;
+  text-align: center;
+  color: #b50418;
+}
+
+#definition {
+  text-align: center;
+  color: #808080;
+  font-family: "Crimson Pro", serif;
+
+}
