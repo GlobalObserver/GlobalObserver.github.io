@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Courgette&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Crimson+Pro&display=swap');
+
+
+/* main {
+  background-image: url("photo/bostonBackground.jpg");
+  background-color: rgba(247, 252, 255, .18) !important;
+  background-blend-mode: color;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+} */
+#background {
+  background-image: url("photo/bostonBackground.jpg");
+  background-color: rgba(247, 252, 255, .18) !important;
+  background-blend-mode: color;
+  z-index: -1;
+  position: fixed;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+main {
+  margin-top: 50px;
+}
+
+h1 {
+  text-align: center;
+  padding-bottom: 2%;
+  padding-top: 2%;
+  font-family: 'Courgette', cursive;
+  font-size: 45px;
+  font-weight: bold;
+}
+
+h3 {
+  font-family: "Source Sans Pro", sans-serif;
+  text-align: center;
+  padding-bottom: 2%;
+}
+
+h4 {
+  font-family: "Source Sans Pro", sans-serif;
+  text-align: center;
+  padding-bottom: 2%;
+}
+
+#attr {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+#attr a {
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: white;
+}
+
+.emphasize {
+  font-family: 'Courgette', cursive;
+  font-size: 25px;
+}
+
+.magazineColor {
+  color: #FFD700;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.4rem;
+  z-index: 1;
+}
+
+#fologo {
+  width: 20%;
+}
+
+#choices {
+  text-align: center;
+}
+
+#button {
+  display: none;
+  background-color: rgba(102, 204, 255, .8);
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin-top: 3%;
+  border-radius: 5px;
+  margin-left: 40%;
+  width: 20%;
+}
+
+#button:hover {
+  background-color: rgba(255, 215, 0, 1);
+}
+
+.outputSection {
+  border-radius: 1em;
+  margin: 20px;
+  padding: 15px;
+}
+
+#resultTitle {
+  color: #d3242a;
+}
+
+#infoSection {
+  height: 500px;
+  background-color: rgba(224, 224, 224, .75);
+  overflow: scroll;
+  padding: 40px;
+  line-height: 2em;
+}
+
+#neighborhoodInfoTitle {
+  font-weight: bold;
+  padding-bottom: 1em;
+}
+
+#attribution {
+  font-size: 12px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: rgba(255,255,255,.7);
+}
+
+#map {
+  width: 700px;
+  height: 500px;
+}
+
+@media (min-width: 1350px) {
+  #map {
+    width: 900px;
+    height: 643px;
+  }
+
+  #infoSection {
+    height: 643px;
+  }
+}
+
+/* For footer */
+
+footer {
+  background-color: #F0F0F0;
+  margin-top: 4%;
+  padding-top: 3%;
+  /* background-color: #ffffe6; */
+}
+
+.gridcontainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 150px;
+  column-gap: 15px;
+  row-gap: 1em;
+}
+
+.teasePhoto {
+  width: 275px;
+  height: 150px;
+  border-radius: 3%;
+}
+
+.footerText {
+  width: 40%;
+  margin-left: 30%;
+  margin-right: 30%;
+  text-align: center;
+  font-size: 22px;
+  font-family: "Crimson Pro", sans-serif;
+  line-height: 2rem;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.uppercase {
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-top: 5%;
+  padding-bottom: 3%;
+}
+
+.red {
+  color: #b50418;
+}
+
+.twitter-share-button {
+  vertical-align: text-bottom !important;
+}
+
+.fologo {
+  width: 250px;
+}
+
+#calltoaction {
+  padding-top: 3%;
+  text-align: center;
+  color: #b50418;
+}
+
+#definition {
+  padding-top: 4%;
+  padding-bottom: 2%;
+  text-align: center;
+  color: #808080;
+  font-family: "Crimson Pro", serif;
+
+}

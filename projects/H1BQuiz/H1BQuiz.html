@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>H-1B Visa Quiz landing page</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+      @import url('https://fonts.googleapis.com/css?family=Noto+Serif&display=swap');
+      @import url('https://fonts.googleapis.com/css?family=Crimson+Pro&display=swap');
+
+      .content {
+        width: 40%;
+        margin-left: 30%;
+        margin-right: 30%;
+        margin-top: 8%;
+        font-family: "Crimson Pro", serif;
+        font-size: 20px;
+        line-height: 1.7em;
+      }
+
+      h2 {
+        margin-top: 4%;
+        width: 62%;
+        margin-left: 18%;
+        margin-right: 20%;
+        text-align: center;
+        font-family: "Noto Serif", serif;
+        line-height: 2em;
+        color: #606060;
+      }
+
+      h3 {
+        font-family: "Crimson Pro", serif;
+      }
+
+       h4 {
+         font-family: "Crimson Pro", serif;
+       }
+
+       a {
+         color: #b50418;
+         text-decoration: none;
+       }
+
+
+      .questionno {
+        color: #696969;
+        margin-left: -10%;
+      }
+
+      .calltoaction {
+        color:  #002868;
+        font-weight: bold;
+        font-size: 25px;
+      }
+
+
+      .choice {
+        font-style: italic;
+        background-color: rgba(72, 74, 72, 0.2);
+        border-radius: 5px;
+        padding-top: 1.8%;
+        padding-bottom: 1.8%;
+        padding-left: 2%;
+        padding-right: 0.8%;
+      }
+
+      .choice:hover {
+        background-color: rgba(23, 110, 232, 0.5);
+      }
+
+      .question-not-answered {
+
+      }
+
+      .question-answered {
+        background-color: rgba(72, 74, 72, 0.8);
+      }
+
+      .question-answered:hover {
+        background-color: inherit;
+      }
+
+      .selected {
+
+      }
+
+      .not-selected {
+        background-color: rgba(72, 74, 72, 0.1);
+      }
+
+      .not-selected:hover {
+        background-color: rgba(72, 74, 72, 0.35);
+      }
+
+      .correct {
+        pointer-events: none;
+        background-color: rgba(3, 158, 29, 0.5);
+      }
+
+      .incorrect {
+        pointer-events: none;
+        background-color: rgba(196, 4, 49, 0.5);
+      }
+
+      .answer {
+        width: 95%;
+        margin-left: 3%;
+        color: 	#505050;
+        border-left: solid 1px;
+        padding-left:3%;
+      }
+
+      .credit {
+        text-align: center;
+        font-size: 18px;
+        padding-right: 2%;
+        padding-top: 10%
+      }
+
+      #background {
+        background-image: url("photo/flag0.jpg");
+        background-color: rgba(238, 238, 238, 0.85) !important;
+        background-blend-mode: color;
+        z-index: -1;
+        position: fixed;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
+
+      #congrats {
+        color: #002868;
+        font-size: 45px;
+        text-align: center;
+        line-height: normal;
+      }
+
+      #cookie {
+        text-align: center;
+      }
+
+      #noti {
+        color: #002868;
+        font-size: 25px;
+        line-height: 1.7em;
+        text-align: center;
+      }
+
+      /* For footer */
+
+      footer {
+        background-color: #F0F0F0;
+        margin-top: 4%;
+        padding-top: 3%;
+        /* background-color: #ffffe6; */
+      }
+
+      .gridcontainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 150px;
+        column-gap: 15px;
+        row-gap: 1em;
+      }
+
+      .teasePhoto {
+        width: 275px;
+        height: 150px;
+        border-radius: 3%;
+      }
+
+      .footerText {
+        width: 40%;
+        margin-left: 30%;
+        margin-right: 30%;
+        text-align: center;
+        font-size: 22px;
+        font-family: "Crimson Pro", sans-serif;
+        line-height: 2rem;
+      }
+
+      .bold {
+        font-weight: bold;
+      }
+
+      .uppercase {
+        text-transform: uppercase;
+        font-weight: bold;
+        padding-top: 5%;
+        padding-bottom: 3%;
+      }
+
+      .red {
+        color: #b50418;
+      }
+
+      .twitter-share-button {
+        vertical-align: text-bottom !important;
+      }
+
+      .fologo {
+        width: 250px;
+      }
+
+      #calltoaction {
+        padding-top: 3%;
+        text-align: center;
+        color: #b50418;
+      }
+
+      #definition {
+        padding-bottom: 2%;
+        text-align: center;
+        color: #808080;
+        font-family: "Crimson Pro", serif;
+
+      }
+
+    </style>
+
+  </head>
+
+  <body>
+    <div id="background"></div>
+    <header>
+      <img id="logo" src="photo/foexplore4.png" width="18%">
+    </header>
+    <div class="content">
+      <h4>By Ha Ta</h4>
+      <p>H-1B is a temporary visa for people working in a specialty occupation (occupations that require expertise such that there are not enough qualified American workers for available jobs), services of exceptional merit and ability relating to a Department of Defense cooperative research and development project, or services as a fashion model of distinguished merit or ability.</p>
+      <p>To be eligible, workers must have at least a U.S. bachelor’s degree, among other things. The visa allows holders to legally work in the United States for three years, with the possibility of extensions.</p>
+      <p>In 2019 alone, there were 190,098 petitions for the H-1B, only a fraction of those applicants were granted the highly coveted visa.</p>
+      <p>If you are an international student, you might be curious or have researched extensively about ways find employers who are willing to sponsor, how to file for and how you can qualify for the visa. Whatever stage you might be in the preparation, you can always test your knowledge with this simple quiz about H-1B visa. Are you ready?</p>
+
+      <p class="calltoaction">Let's get started!</p>
+      <h4 class="questionno">1 of 10</h4>
+      <h3 id="q1" class="question">What is the agency responsible for the H-1B visas selection process?</h3>
+        <p id="ans1a" class="choice">The Department of Homeland Security (DHS)</p>
+        <p id="ans1b" class="choice">U.S. Customs and Border Protection (CBP)<p>
+        <p id="ans1c" class="choice">The United States Citizenship and Immigration Services (USCIS)</p>
+        <p id="ans1d" class="choice">U.S. Immigration and Customs Enforcement (ICE)</p>
+        <p class="answer" id="aside1" hidden>According to its website, USCIS is the government agency that oversees lawful immigration to the United States.</p>
+
+      <h4 class="questionno">2 of 10</h4>
+      <h3 id="q2" class="question">Where are most foreign workers on H-1B visas from?</h3>
+        <p class="choice" id="ans2a">China</p>
+        <p class="choice" id="ans2b">India<p>
+        <p class="choice" id="ans2c">The Philippines</p>
+        <p class="choice" id="ans2d">Russia</p>
+        <p class="answer" id="aside2" hidden>More than half of all H-1B visas have been awarded to Indian nationals from fiscal years 2001 to 2015. The second-largest H-1B recipients share went to workers from China (9.7%). Other countries receiving a large share of visas during this time include Canada (3.8%), the Philippines (3.0%) and South Korea (2.8%), according to Pew Research Center.</p>
+
+      <h4 class="questionno">3 of 10</h4>
+      <h3 id="q3" class="question">How many H-1B visas are issued each year?</h3>
+        <p class="choice" id="ans3a">65,000</p>
+        <p class="choice" id="ans3b">100,000<p>
+        <p class="choice" id="ans3c">85,000</p>
+        <p class="choice" id="ans3d">35,000</p>
+        <p class="answer" id="aside3" hidden>The number of H-1B visas issued each year, also known as the H-1B cap, are 65,000 for workers with bachelor’s degrees, and 20,000 more for those with master’s degrees or higher.</p>
+
+      <h4 class="questionno">4 of 10</h4>
+      <h3 id="q4" class="question" >Which one of the following is NOT President Trump's tweet about the H-1B?</h3>
+        <p class="choice" id="ans4a">We will follow two simple rules: BUY AMERICAN & HIRE AMERICAN!</p>
+        <p class="choice" id="ans4b">We don't need any more foreign nationals come and steal our American jobs on American soil. I won’t let this happen anymore!<p>
+        <p class="choice" id="ans4c">H1-B holders in the United States can rest assured that changes are soon coming which will bring both simplicity and certainty to your stay, including a potential path to citizenship</p>
+        <p class="choice" id="ans4d">Buy American & hire American are the principles at the core of my agenda, which is: JOBS, JOBS, JOBS! Thank you @exxonmobil</p>
+        <div id="aside4" hidden>
+          <p class="answer">The President appears to have mixed feelings towards granting authorizations for skilled foreign workers to the U.S. In 2017, he issued the Buy American, Hire American executive order suggesting reforms to "ensure that H-1B visas are awarded to the most-skilled or highest-paid petition beneficiaries.” The order worried many students and workers planning to obtain the popular visa to work in the U.S. However, in a tweet in 2019, he assured H1-B holders in the United States, promising changes that will bring "simplicity and certainty to your stay, including a potential path to citizenship.”</p>
+
+          <!-- These are tweets -->
+          <blockquote class="twitter-tweet" id="three" hidden><p lang="en" dir="ltr">We will follow two simple rules: BUY AMERICAN &amp; HIRE AMERICAN!<a href="https://twitter.com/hashtag/InaugurationDay?src=hash&amp;ref_src=twsrc%5Etfw">#InaugurationDay</a> <a href="https://twitter.com/hashtag/MAGA?src=hash&amp;ref_src=twsrc%5Etfw">#MAGA</a>🇺🇸</p>&mdash; Donald J. Trump (@realDonaldTrump) <a href="https://twitter.com/realDonaldTrump/status/822502887477673984?ref_src=twsrc%5Etfw">January 20, 2017</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+          <blockquote class="twitter-tweet" id="three" hidden><p lang="en" dir="ltr">H1-B holders in the United States can rest assured that changes are soon coming which will bring both simplicity and certainty to your stay, including a potential path to citizenship. We want to encourage talented and highly skilled people to pursue career options in the U.S.</p>&mdash; Donald J. Trump (@realDonaldTrump) <a href="https://twitter.com/realDonaldTrump/status/1083705208834834433?ref_src=twsrc%5Etfw">January 11, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+
+
+      <h4 class="questionno">5 of 10</h4>
+      <h3 id="q5" class="question">Which following employers are exempt from the H1-B cap?</h3>
+        <p class="choice" id="ans5a">Universities</p>
+        <p class="choice" id="ans5b">Research organizations<p>
+        <p class="choice" id="ans5c">Non-profits related to a higher education institution</p>
+        <p class="choice" id="ans5d">All of the above</p>
+        <p class="answer" id="aside5" hidden>Universities and colleges, nonprofits related or affiliated to an institution of higher education and nonprofit research organizations or government research institutions are exempt from the H-1B cap through the American Competitiveness in the 21st Century Act of 2000. According to Pew Research Center, these types of employers accounted for about 10% of H-1B visa petitions from 2010 to 2017.</p>
+
+
+      <h4 class="questionno">6 of 10</h4>
+      <h3 id="q6" class="question">If you major in science, technology, engineering, and mathematics (STEM) fields, how many years following your graduation are you allowed to stay and work in the U.S. under your Optional Practical Training authorization?</h3>
+        <p class="choice" id="ans6a">1 year</p>
+        <p class="choice" id="ans6b">2 years<p>
+        <p class="choice" id="ans6c">3 years</p>
+        <p class="choice" id="ans6d">4 years</p>
+        <p class="answer" id="aside6" hidden>The regular OPT authorization is for 12 months, however, certain F-1 students with (STEM) degrees may apply for a 24-month extension of their post-completion optional practical training (OPT), according to the USCIS website. The OPT work authorization can prove helpful in cases where a worker already had an employer sponsoring their H-1B visa but did not get it due to the lottery process. The worker can stay and work under OPT while waiting for the next year H-1B selection process. Note that in order to be eligible for the STEM OPT extension, you have to apply for it. </p>
+
+
+      <h4 class="questionno">7 of 10</h4>
+      <h3 id="q7" class="question">Which industry below has the highest number of H-1B petitions filed in 2017?</h3>
+        <p class="choice" id="ans7a">Engineering Services</p>
+        <p class="choice" id="ans7b">Office of Lawyers<p>
+        <p class="choice" id="ans7c">Commercial Banking</p>
+        <p class="choice" id="ans7d">Computer Programming Services</p>
+        <p class="answer" id="aside7" hidden>Petitions for Computer Programming Services industry outnumbered the other industries by a far distance. With 108,332 petitions filed, there are more petitions filed in this industry than the other three combined.</p>
+
+
+      <h4 class="questionno">8 of 10</h4>
+      <h3 id="q8" class="question">The holder of which of the following degree might have more advantage over others in the H1-B Lottery process?</h3>
+        <p class="choice" id="ans8a">Master's degree or higher</p>
+        <p class="choice" id="ans8b">Bachelor's degree<p>
+        <p class="choice" id="ans8c">Professional degree</p>
+        <p class="choice" id="ans8d">All degrees have an equal chance under the H1-B Lottery process</p>
+        <p class="answer" id="aside8" hidden>In April, 2019, the Department of Homeland Security announced they will reverse the order by which U.S. Citizenship and Immigration Services (USCIS) selects H-1B petitions under the H-1B regular cap and the advanced degree exemption. The change is expected to result in an estimated increase of up to 16% (or 5,340 people) in the number of H-1B recipient who has a master's degree or higher, according to an announcement on USCIS website.</p>
+
+
+      <h4 class="questionno">9 of 10</h4>
+      <h3 id="q9" class="question">If the number of applications for the H-1B exceeds the cap (the maximum number of visas issued each year) what does USCIS do?</h3>
+        <p class="choice" id="ans9a">Select petitions on a first come first serve basis</p>
+        <p class="choice" id="ans9b">Holds a lottery to randomly select which petitions it will process<p>
+        <p class="choice" id="ans9c">Expand the cap to meet the new demand</p>
+        <p class="choice" id="ans9d">Choose petitions from highest-paying jobs</p>
+        <p class="answer" id="aside9" hidden>In the past several years, the United States Citizenship and Immigration Services has received more petitions than there are visas. If the maximum number of applications is reached during the first five business days of April, the agency holds a lottery to randomly select which petitions it will process.</p>
+
+
+      <h4 class="questionno">10 of 10</h4>
+      <h3 id="q10" class="question">Who is responsible to file a petition for an H-1B visa?</h3>
+        <p class="choice" id="ans10a">The employee</p>
+        <p class="choice" id="ans10b">The employer<p>
+        <p class="choice" id="ans10c">The state</p>
+        <p class="choice" id="ans10d">None of the above</p>
+        <p class="answer" id="aside10" hidden>The employer is responsible for filing the H1B visa petition with the U.S. Immigration Department.</p>
+      <p id="congrats"></p>
+      <p id="noti" hidden>Awesome! You've actually gone all the way and completed the quiz. Looks like you're dedicated to getting an H-1B yourself! Now you deserve a cookie!</p>
+      <div id="cookie" hidden><img src ="photo/cookie.png" width="100px"  height="100px"></div><br>
+      <p>All visa processes require careful study and even consultation from professionals. Northeastern University’s Office of Global Services offers H-1B visa sessions for interested students on a regular basis. Sign up to their calendar to see upcoming sessions available.</p>
+      <p>Subsribe to the Foreign Observer's newsletter or follow us on social media to read more news about international students experience in the U.S.</p>
+    </div>
+      <section class="footer">
+        <footer>
+          <div class="footerText">
+            <p>Did you enjoy this project? <span class="bold">Spread the word.</span><p>
+            <div class="social">
+              <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+              <div class="fb-like" data-href="https://foreignobserver.github.io" data-width="" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+            </div>
+
+            <p class="uppercase"><span class="red">Xplore</span> more on our site</p>
+            <div class="gridcontainer">
+              <div><img class="teasePhoto" src="photo/flag1.jpg"></div>
+              <div><img class="teasePhoto" src="photo/bostonBackground.jpg"></div>
+              <div>So you think you know the H1B? Quiz</div>
+              <div>Find your ideal neighborhood in Boston</div>
+            </div>
+            <img class="fologo" src="photo/logo.png">
+            <div class="credit">
+            <p>Icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"                 title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"                 title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></p>
+            <p>Background photo by  <a href = "https://unsplash.com/@lucassankey?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Lucas Sankey</a> on <a href = "https://unsplash.com/search/photos/american-flag?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></p>
+            </div>
+          </div>
+          <p id="definition">Xplore is a project by the <a href="https://www.foreignobserver.net">Foreign Observer</a> magazine that explores issues and trends affecting international students through data.</p>
+        </footer>
+      </section>
+    <script src="quiz.js"></script>
+  </body>
+
+</html>

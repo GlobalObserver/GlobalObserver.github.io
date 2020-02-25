@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css?family=Crimson+Pro&display=swap');
+
+#header {
+  width: 40%;
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
+#subtitle {
+  font-size: 24px;
+  font-family: "Crimson Pro", sans-serif;
+  text-align: center;
+  font-style: italic;
+  margin-top: 0;
+  color: black;
+  padding-bottom: 1%;
+}
+
+:root {
+  --primary: #ffffff;
+  --dark: #b50418;
+  --light: #fff;
+  --shadow: 0 1px 5px rgba(104, 104, 104, 0.8);
+}
+
+html {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  color: black;
+}
+
+body {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  background: #ffffff;
+  line-height: 1.4;
+  background-color: #F0F0F0;
+}
+
+.btn {
+  background: var(--dark);
+  color: var(--light);
+  padding: 0.6rem 1.3rem;
+  text-decoration: none;
+  font-weight: bold;
+  border: 0;
+  border-radius: 4px;
+}
+
+.btn:hover {
+  background: #ffffff;
+  color: black;
+}
+
+.aboutgraf {
+  width: 60%;
+  margin-top: 5%;
+  margin-left: 20%;
+  margin-right: 20%;
+  line-height: 2.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: #b50418;
+}
+
+a:hover {
+  color: grey;
+}
+
+img {
+  max-width: 100%;
+}
+
+.wrapper {
+  display: grid;
+  grid-gap: 20px;
+}
+
+/* Navigation */
+.main-nav ul {
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+  display: grid;
+  grid-gap: 20px;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.main-nav a {
+  background: var(--primary);
+  display: block;
+  text-decoration: none;
+  padding: 0.7rem;
+  text-align: center;
+  color: black;
+  text-transform: uppercase;
+  font-size: 1rem;
+  box-shadow: var(--shadow);
+
+}
+
+.main-nav a:hover {
+  background: var(--dark);
+  color: var(--light);
+}
+
+/* Top Container */
+.top-container {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-areas:
+    'showcase showcase top-box-a'
+    'showcase showcase top-box-b';
+}
+
+/* Showcase */
+.showcase {
+  grid-area: showcase;
+  min-height: 400px;
+  background: url("photo/pic.jpg");
+  background-color: rgba(13, 13, 13, 0.40) !important;
+  background-blend-mode: color;
+  background-size: cover;
+  background-position: center;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  box-shadow: var(--shadow);
+}
+
+.showcase h1 {
+  font-size: 4rem;
+  margin-bottom: 0;
+  color: var(--light);
+}
+
+.showcase p {
+  font-size: 1.3rem;
+  margin-top: 0;
+  color: var(--light);
+}
+
+/* Top Box */
+.top-box {
+  color: white;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+
+.top-box .price {
+  font-size: 2.5rem;
+}
+
+.top-box-a {
+  grid-area: top-box-a;
+  background: url("photo/flag.jpg");
+  background-color: rgba(13, 13, 13, 0.40) !important;
+  background-blend-mode: color;
+  background-size: cover;
+  background-position: center;
+}
+
+.top-box-b {
+  grid-area: top-box-b;
+  background: url("photo/paper.png");
+  background-color: rgba(13, 13, 13, 0.40) !important;
+  background-blend-mode: color;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Boxes */
+.boxes {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.box {
+  background: var(--primary);
+  text-align: center;
+  padding: 1.5rem 2rem;
+  box-shadow: var(--shadow);
+}
+
+/* Footer */
+footer {
+  margin-top: 10rem;
+  background: var(--dark);
+  color: var(--light);
+  text-align: center;
+  padding: 0.5px;
+}
+
+/* Media Queries */
+@media (max-width: 700px) {
+  .top-container {
+    grid-template-areas:
+      'showcase showcase'
+      'top-box-a top-box-b';
+  }
+
+  .showcase h1 {
+    font-size: 2.5rem;
+  }
+
+  .main-nav ul {
+    grid-template-columns: 1fr;
+  }
+
+  .info {
+    grid-template-columns: 1fr;
+  }
+
+  .info .btn {
+    display: block;
+    text-align: center;
+    margin: auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .top-container {
+    grid-template-areas:
+      'showcase'
+      'top-box-a'
+      'top-box-b';
+  }
+}

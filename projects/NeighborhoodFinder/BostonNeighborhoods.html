@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Best Boston Neighborhoods</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+  integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+  crossorigin=""></script>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div id="background"></div>
+  <header>
+    <a href="https://foreignobserver.net/"><img src="photo/foexplore6.png" id="fologo"></a>
+  </header>
+  <main>
+    <div id="inputPage">
+      <h1>What's your ideal Boston neighborhood?</h1>
+      <h4>By <a href="https://haminhta.github.io/">Ha Ta</a></h4>
+      <h3><span class="emphasize">Select 3</span> factors that you care about most when choosing a place to live:</h3>
+      <div id="choices" class="container">
+        <div class="row">
+          <div class="col-md">
+            <img class="buttonImg" src="photo/unselected0.png" width="100%" height="100%" id="imgChange1">
+          </div>
+          <div class="col-md">
+            <img class="buttonImg" src="photo/unselected1.png" width="100%" height="100%" id="imgChange2">
+          </div>
+          <div class="col-md">
+            <img class="buttonImg" src="photo/unselected2.png" width="100%" height="100%" id="imgChange3">
+          </div>
+          <div class="col-md">
+            <img class="buttonImg" src="photo/unselected3.png" width="100%" height="100%" id="imgChange4">
+          </div>
+          <div class="col-md">
+            <img class="buttonImg" src="photo/unselected4.png" width="100%" height="100%" id="imgChange5">
+          </div>
+          <div class="col-md">
+            <img class="buttonImg" src="photo/unselected5.png" width="100%" height="100%" id="imgChange6">
+          </div>
+          <div class="col-md">
+            <img class="buttonImg" src="photo/unselected6.png" width="100%" height="100%" id="imgChange7">
+          </div>
+        </div>
+      </div>
+      <br>
+      <button id="button" type="button">Show me my neighborhood!</button>
+      <div id="attr">
+        <p>Background photo by  <a href = "https://unsplash.com/@anthonydelanoix?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Anthony DELANOIX</a> on <a href = "https://unsplash.com/search/photos/boston">Unsplash</a></p>
+      </div>
+    </div>
+
+    <div id="resultPage" hidden>
+      <h1>Your neighborhood is: <span id="resultTitle" class="resultText"></span> !</h1>
+      <div class="container">
+        <div class="row">
+          <div id="map" class="col-lg outputSection leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom"></div>
+          <div id="infoSection" class="col-lg outputSection">
+            <h3 id="neighborhoodInfoTitle">About <span class="resultText"></span></h3>
+            <p id="neighborhoodInfo"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer id="footer" hidden>
+    <div class="footerText">
+      <p>Did you enjoy this project? <span class="bold">Spread the word.</span><p>
+      <div class="social">
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <div class="fb-like" data-href="https://foreignobserver.github.io" data-width="" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+      </div>
+      <p class="uppercase"> Xplore more on our site</p>
+      <div class="gridcontainer">
+        <div><img class="teasePhoto" src="photo/flag1.jpg"></div>
+        <div><img class="teasePhoto" src="photo/bostonBackground.jpg"></div>
+        <div>So you think you know the H-1B? - Quiz</div>
+        <div>Find your ideal Boston neighorbood</div>
+      </div>
+      <img class="fologo" src="photo/logo.png">
+    </div>
+    <p id="definition">Xplore is a project by the <a href="https://www.foreignobserver.net">Foreign Observer</a> magazine that explores issues and trends affecting international students through data.</p>
+  </footer>
+
+  <script src="inputPage.js"></script>
+  <script src="Boston_Neighborhoods.geojson"></script>
+  <script src="MBTAGeoJSON.js"></script>
+  <script type="text/javascript" src="MovingMarker.js"></script>
+  <script src="geo.js"></script>
+  <script src="data.js"></script>
+  <script src="outputPage.js"></script>
+</body>
+</html>
