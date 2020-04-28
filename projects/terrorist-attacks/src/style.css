@@ -1,0 +1,323 @@
+ * {
+     box-sizing: border-box;
+ }
+
+ body {
+     font-family: 'Work Sans', sans-serif;
+     font-size: 18px;
+     line-height: 1.5em;
+     background-color: #000;
+     color: #f9f9f9;
+     margin: 0;
+ }
+
+  .cover-pic {
+  height: 90vh;
+  width: 100vw;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.logo {
+  margin-top: 2em;
+  align-self: start;
+  text-align:center;
+}
+
+.logo img {
+  cursor: pointer;
+}
+
+.header-text-container {
+  width: 100%;
+  display: grid;
+  justify-items: center;
+
+}
+
+ h1 {
+     font-family: 'Eczar', serif;
+     padding: 0 .3em;
+     text-align: center;
+     max-width: 50%;
+     font-weight: 400;
+    line-height: 1em;
+    font-size: 47px;
+ }
+
+
+
+.byline, .subhead {
+  margin: 0em 0 2em;
+  text-align: center;
+}
+
+.subhead {
+  max-width: 40%;
+  font-style: italic;
+}
+
+
+ .container {
+     display: flex;
+     justify-content: center;
+ }
+
+ .content{
+  margin: 0 1em;
+  line-height: 167%;
+  letter-spacing: 0.02em;
+  max-width: 40em
+ }
+
+ a {
+  text-decoration: none;
+  text-decoration: underline white;
+  color: white;
+  font-style: italic;
+ }
+
+ .data-source-container a {
+  text-decoration: underline gray;
+  color: gray;
+ }
+
+ aside {
+     flex: 1;
+     padding: 1.5em;
+ }
+
+ .two-column {
+    margin-top: 8em;
+    position: relative;
+ }
+
+p {
+  opacity: 0.5;
+  margin-bottom: 20em;
+}
+ 
+
+
+.one-column p {
+  opacity: 1;
+ }
+
+ .paragraph-full-opacity {
+  opacity: 1;
+ }
+
+ .right-col {
+  flex: 3;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 2em;
+  height: 70%;
+  display: grid;
+  justify-items: center;
+
+ }
+
+  #chart {
+      width: 100%;
+      height: 88vh;
+      text-align: center;
+  }
+
+  .grids {
+      stroke: #dadadd;
+      fill: none;
+      opacity: 0.2;
+  }
+
+  #missing-year, .dashed {
+    stroke-dasharray: 5,5;
+    opacity: 1;
+    stroke-width: 0.7px;
+  }
+
+  .month-label {
+      fill: #dadadd;
+      text-anchor: middle;
+      font-size: 0.8em;
+      dominant-baseline: middle;
+  }
+
+  .year-label {
+    fill: #dadadd;
+    font-size: 0.6em;
+    text-anchor: middle;
+  }
+
+  .point {
+/*    fill: rgba(8,196,208);*/
+    opacity: 0.5;
+    cursor: pointer;
+/*    mix-blend-mode: multiply;*/
+  }
+
+.data-source-container {
+    font-size: 12px;
+    line-height: 120%;
+    width: 60%;
+    color: gray;
+    justify-self: center;
+    border-top: 1px solid gray;
+}
+
+.last {
+  min-height: 1em;
+}
+
+
+footer {
+  margin-top: 10em;
+  background: #d1d1d4;
+  color: black;
+}
+
+.three-col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 3em;
+  justify-content: space-around;
+}
+
+footer div {
+margin: 2em;
+}
+
+.seperator {
+border-top: 1.5px solid rgba(51,51,51,0.5);
+margin: 0.5em 0;
+}
+
+footer p {
+font-size: 14px;
+line-height: 160%;
+margin-bottom:0;
+}
+
+/* Phone */
+@media only screen 
+and (max-device-width: 500px)  {
+
+
+  .logo {
+    margin-top: .5em;
+  }
+
+
+  .logo a img {
+    width: 40%;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .subhead {
+    max-width: 95%;
+  }
+
+  header {
+    margin: 1em 0;
+  }
+
+  .content{
+    line-height: 170%;
+    letter-spacing: 0;
+    font-size:18px;
+  }
+
+  p {
+    margin-bottom: 15em;
+  }
+  
+  .container {
+    flex-direction: column;
+  }
+
+  .right-col {
+    z-index: 100;
+    background: black;
+    top:0;
+
+  }
+
+
+  .one-column, .content {
+    margin: 0px 0.5em;
+  }
+
+  #chart {
+    height: 50vh;
+    margin-top: 1em;
+  }
+
+  .month-label {
+    font-size: 0.5em;
+  }
+
+  aside p {
+    margin-top: 10em;
+  }
+
+  h1 {
+    line-height: 140%;
+    max-width: 95%;
+  }
+
+  .cover-pic {
+    height: fit-content;
+  }
+
+.data-source-container {
+  font-size: 8px;
+  width: 95%;
+  line-height: 100%;
+  padding-top: 1em;
+}
+
+
+  .last {
+    min-height: 5em;
+    margin-bottom:0;
+  }
+
+  footer {
+    margin-top: 0;
+  }
+
+  .three-col {
+    grid-gap: 0em;
+    display :flex;
+    justify-content: stretch;
+    flex-flow: wrap;
+  }
+
+  footer div {
+    margin: 1em;
+  }
+
+  footer h4 {
+
+  display: inline;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(51,51,51,0.5);
+  }
+
+  .seperator {
+  width:0%;
+  }
+
+  footer p {
+  font-size: 12px;
+  }
+
+
+}
+
+

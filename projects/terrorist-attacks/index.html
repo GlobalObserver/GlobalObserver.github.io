@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>US Terrorist Attacks: International vs Domestic</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <link rel="stylesheet" href="./src/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Eczar:400,600,700|Work+Sans:400,400i&display=swap" rel="stylesheet">
+    <script src="./lib/jquery-3.4.1.min.js"></script>
+    <script src="./lib/jquery.waypoints.min.js"></script>
+
+</head>
+
+<body>
+
+   <header>
+        <div class="cover-pic">
+          <div class="logo"><a href="https://gobserver.net/"><img src="./img/Nosubhead_Longheader.png" width="25%"></img></a></div>
+          <div class="header-text-container">
+              <h1>US Terrorist Attacks: International vs Domestic</h1>
+              <p class="subhead">The conversation about US terrorism centers mostly on attacks by foreign groups specifically Al-Qaeda but data shows that between 2011 and 2019, the US saw a surge in terrorism tied to domestic white supremacy. 
+            </p>
+              <p class="byline">by Szu Yu Chen</p>
+          </div>
+        </div>
+
+      </header>
+
+    <main class="main-story-container">
+        
+        <section class="container one-column">
+            <p class="content">
+
+                The United States has a long history of confronting serious challenges from terrorists worldwide. Before I came to the U.S. to pursue a Master's degree, the conversation about terrorist attacks with my friends mostly centered around the 9/11 attacks that took more than 3,000 lives. It was not until reading <a href="https://www.politifact.com/article/2019/dec/05/terrorism-united-states-key-facts-patterns-and-tre/">this article</a> that I realized the US has been dealing with a large number of domestic terrorist attacks, too. </br></br>
+                I dug deeper into the recent history of terrorism and its patterns by cleaning and visualizing data from The Global Terrorism <a href="https://www.start.umd.edu/gtd">Database</a> (GTD), which includes information on terrorist attacks around the world from 1970 through 2019.</br></br>
+                The GTD classified an incident as a terrorist attack if it intentionally used violence or threat of violence in the pursuit of political, economic, religious or social goals. It also holds that only sub-national groups, instead of states, can commit acts of terrorism. Types of terrorist attacks include bombings, mass shootings, hijackings, etc. </br></br>
+            </p>
+        </section>
+        <section class="container two-column">
+            <div class="right-col">
+                <svg id="chart"></svg>
+            </div>
+             <aside class="content intro">
+                <p id="intro-texts">
+                    I used a radial chart where the background grids represent the months and years and each colored circle indicates a terrorist attack. The size of the circle is proportional to the number of deaths in the attack. </br>
+                </p>
+                <p id="zero-death">
+                    Attacks with zero deaths are also presented in the chart. Of the 938 terrorist attacks documented by the dataset, 795 incidents had no casualties. </br>
+                </p>
+                <p id="with-deaths">
+                    The other 136 attacks killed more than 3,600 people.</br>
+                </p>
+                <p id="with-multicolors">
+                    Each circle is color based on the type of attack including islamic extremists, right-wing extremists, incel extremists, animal-rights-related and others</br>
+                </p>
+                <p id="nine-eleven">
+                    Here’s the 9/11 attack initiated by the Islamic terrorist group, Al-Qaeda.  
+                </p>
+                <p id="alqaeda">
+                    There was a series of terrorist attacks by the same group on that day, which injured more than 25,000 people and killed more than 3,000 people including around 300 firefighters and emergency responders.</br>
+                </p>
+
+                <p id="alqaeda-and-jihadi-inspired">
+                    Since then, the conversation on terrorism has focused mainly on Islamic extremist groups.</br></br>  
+                </p>
+                <p id="right-inspired">
+
+                    But what's also worth noticing is that between 2002 and 2019, attacks initiated by domestic far-right extremists killed 103 people in the United States.</br>
+
+                </p>
+
+
+                <p id="jihadi-and-right-wing">
+                    That's almost exactly the same number of people killed by "Jihadi-inspired" terror attacks, which claimed 110 lives.</br>
+                </p>
+
+                <p id="right-wing">
+                    The types of right-wing extremist groups in this visualization include anti-government, anti-abortion, white supremacist, anti-Semitics, anti-LGBT and Neo-Nazi.</br>
+                </p>
+
+
+                <p id="white">
+                    
+                    Many white extremist killers were inspired by earlier attacks. </br></br>
+                    <a href="https://www.nytimes.com/interactive/2019/04/03/world/white-extremist-terrorism-christchurch.html">An analysis</a> done by The New York Times indicated that "… at least a third of white extremist killers since 2011 were inspired by others who perpetrated similar attacks …"</br>
+
+                </p>
+
+                <p id="white-sec">
+                    Many of these attacks targeted places of worship. The deadliest attacks by white extremist groups include a shooting at a Sikh temple in Wisconsin in 2012 and a shooting at a Black church in South Carolina in 2015.</br>
+
+                </p>
+
+                <p id="incel">
+                    There are other domestic extremist groups with different claims as well.</br></br>
+
+                    Some radical Incel extremists seek violence against women to do justice to men having sexual failures. </br>
+                </p>
+
+                <p id="animal-rights">
+                    Groups with environmental-related claims such as the Animal Liberation Front and Earth Liberation Front have emerged in the past 10 years and were labeled as serious terrorist threats by the FBI. </br>
+                </p>
+
+                <p id="explore">
+                    Explore it yourself! </br>
+                </p>
+                
+                <p class="last"></p>
+
+            </aside>
+
+        </section>
+
+        
+    </main>
+    <footer class="three-col">
+
+        <div>
+           <h4>Special Thanks</h4>
+           <div class="seperator"></div>
+           <p>I would like to thank my editors, Ha M. Ta and Matthew Carroll, for their 
+               patience, dedication and support.</p>
+       </div>
+       <div>
+           <h4>About Me</h4>
+           <div class="seperator"></div>
+           <p>Hello there! I’m Szu Yu Chen, a data reporter and designer based in Boston. I’m now a graduate student at Northeastern University’s School of Journalism. </p>
+       </div>
+      
+       <div>
+           <h4>Contact Me</h4>
+           <div class="seperator"></div>
+           <p>You can reach me via email: szuyuchen0101@gmail.com</p>
+       </div>
+
+   </footer>
+<script src="./src/script.js"></script>
+</body>
+
+</html>
