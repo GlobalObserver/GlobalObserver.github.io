@@ -11,6 +11,11 @@
      margin: 0;
  }
 
+ .disclaim {
+   opacity: 0;
+   display: none;
+ }
+
   .cover-pic {
   height: 90vh;
   width: 100vw;
@@ -203,6 +208,19 @@ margin-bottom:0;
 /* Phone */
 @media only screen 
 and (max-device-width: 500px)  {
+
+  .disclaim {
+    opacity: 1;
+    display: block;
+    background: #ffcc00;
+    color: rgb(51,51,51);
+    text-align: center;
+    line-height: 115%;
+    padding: 0.5em 1em;
+    max-width: 95%;
+    margin: 1em 0;
+    font-size: 16px;
+  }
 
 
   .logo {

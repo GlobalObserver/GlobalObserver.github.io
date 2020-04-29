@@ -35,7 +35,7 @@ var monthScale = d3.scaleOrdinal()
 var circleRadiusScale = d3.scaleSqrt().range([4, 50]);
 
 if (smallScreen) {
-    circleRadiusScale.range([1, 20])
+    circleRadiusScale.range([1.5, 25])
 }
 
 var svg = d3.select("#chart")
@@ -424,7 +424,7 @@ d3.json("./us_terr_data/terr.json", function (error, data) {
                 .attr("cy", 5);
 
             nan.append("text")
-                .text("Null")
+                .text("Unknown")
                 .attr("fill", "rgba(255,255,255,0.5)")
                 .attr("x", 10 + circleRadiusScale(50))
                 .attr("y", 9)
