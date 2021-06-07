@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Kyoto's cherry blossoms blooming earlier than ever</title>
+		<link
+			rel="Shortcut Icon"
+			href="https://gobserver.net/wp-content/uploads/2020/01/cropped-MagazineHeaderWhite2-copy.png"
+			type="image/x-icon"
+		/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.5.0/d3.min.js"></script>
+		<script src="https://d3js.org/d3-drag.v2.min.js"></script>
+		<script src="https://unpkg.com/enter-view"></script>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<div id="nav">
+			<a href="https://gobserver.net/"
+				><img
+					class="logo"
+					src="asset/GO_logo.png"
+					alt="Logo of The Global Observer"
+					height="45"
+			/></a>
+		</div>
+		<section id="title">
+			<div id="title-chart"></div>
+			<div id="title-headline">
+				<h1>Kyoto's cherry blossoms blooming earlier than ever</h1>
+				<div class="title-deck">
+					<p>
+						<a
+							href="https://gobserver.net/staff_name/yuriko-schumacher/"
+							>Yuriko Schumacher</a
+						>
+						| June, 2021
+					</p>
+					<p>
+						Cherry blossoms in the city of Kyoto peaked on March 26
+						this year. It was the record-earliest since 812 A.D.
+					</p>
+				</div>
+				<a href="#intro"
+					><div class="scrollButton">
+						<span></span><span></span><span></span></div
+				></a>
+			</div>
+		</section>
+		<section id="intro">
+			<article>
+				<p>
+					This spring, cherry blossoms saw the peak blooming on March
+					26 in the city of Kyoto, Japan, according to
+					<a
+						href="https://www.data.jma.go.jp/sakura/data/sakura_mankai.html"
+						target="_blank"
+						>the Japan Meteorological Agency</a
+					>
+					. This was the record earliest since 812 A.D., according to
+					data
+					<a
+						href="http://atmenv.envi.osakafu-u.ac.jp/aono/kyophenotemp4/"
+						target="_blank"
+						>released</a
+					>
+					by Yasuyuki Aono, a professor at Osaka Prefecture
+					University.
+				</p>
+				<p>
+					Professor Aono's team identified the full-blooming dates in
+					ancient times "from old documents," such as diaries by
+					emperors and historical documents created by other
+					officials.
+				</p>
+				<p>
+					The flowering of cherry blossoms has an extremely
+					significant meaning in Japanese spring. Many people like to
+					gather around cherry trees to eat, drink, and take photos.
+					The flowers are also the symbol of graduation and entrance
+					ceremonies, since the Japanese academic year ends in March
+					and starts in April.
+				</p>
+				<p>
+					In recent decades, the date when the blossoms reach full
+					bloom has been getting earlier and earlier, the data show.
+				</p>
+			</article>
+		</section>
+
+		<section id="kyoto1200">
+			<div id="sub">
+				<div id="sub-legend"></div>
+				<div id="sub-chart"></div>
+			</div>
+			<div id="main">
+				<div id="kyoto1200__histogram">
+					<div class="histogram-tooltip"></div>
+				</div>
+				<div id="explanation" class="scrolly">
+					<div class="step" data-index="0">
+						<p>
+							This chart shows cherry blossom's peak dates from
+							812 to 2021. Cherry blossom petals are placed to
+							represent full-blooming dates, having X-axis for the
+							number of days after Jan. 1, and Y-axis for the
+							year.
+						</p>
+						<p>
+							Scrolling down will show a zoomed-in version. The
+							gray bar indicates the year that is in view on the
+							zoomed-in version of the chart.
+						</p>
+						<div class="scrollButton">
+							<span></span><span></span><span></span>
+						</div>
+					</div>
+					<div class="step" data-index="1">
+						<p>
+							Petal colors represent the year, from 812 to 2021.
+						</p>
+						<div class="scrollButton">
+							<span></span><span></span><span></span>
+						</div>
+					</div>
+					<div class="step" data-index="2">
+						<p>
+							Angles of petals indicate the year's average March
+							temperature data (F).
+						</p>
+						<p>
+							Many studies have shown the temperature in March
+							affects heavily on cherry blossoms blooming.
+							<a
+								href="http://atmenv.envi.osakafu-u.ac.jp/aono/kyophenotemp4/"
+								target="_blank"
+								>Professor Aono's team estimated</a
+							>
+							average March temperatures from 812 to 1879, based
+							on the cherry blossom's full-blooming date.
+						</p>
+						<p>
+							From 812 to 1879, the angles represent those
+							estimated temperature data. From 1880 to present,
+							temperature data are actually observed ones,
+							revealed by the
+							<a
+								href="https://www.data.jma.go.jp/obd/stats/etrn/index.php"
+								target="_blank"
+								>Japan Meteorological Agency</a
+							>.
+						</p>
+						<div class="scrollButton">
+							<span></span><span></span><span></span>
+						</div>
+					</div>
+					<div class="step" data-index="3">
+						<p>
+							This chart will show the number of observations of
+							peak-blooming dates.
+						</p>
+						<div class="scrollButton">
+							<span></span><span></span><span></span>
+						</div>
+					</div>
+					<div class="step" data-index="4">
+						<h2>Cherry blossom's full-blooming date in Kyoto</h2>
+						<div class="scrollButton">
+							<span></span><span></span><span></span>
+						</div>
+					</div>
+				</div>
+				<div id="kyoto1200__scatterplot">
+					<div class="scatterplot-tooltip"></div>
+					<div class="scatterplot-annotation__point"></div>
+					<div class="scatterplot-annotation__line"></div>
+				</div>
+			</div>
+		</section>
+		<section id="tile">
+			<article>
+				<p>
+					The median date for full blooming has been getting earlier
+					and earlier. Between 812 and 1899, the full bloom date was
+					104 days after Jan. 1.
+				</p>
+				<p>But between 1900 and 2021, the median date is 98 days.</p>
+				<img src="asset/tile-chart.png" alt="" />
+				<p>
+					In 2021, the cherry blossoms in Kyoto set a new early record
+					for peaking, fully blooming 84 days after Jan. 1, on March
+					26.
+				</p>
+				<p>
+					<a href="https://yuriko-schumacher.github.io/sakura"
+						>Go back to top</a
+					>
+				</p>
+			</article>
+		</section>
+		<div id="footer">
+			<a href="https://gobserver.net/"
+				><img
+					class="logo"
+					src="asset/GO_logo.png"
+					alt="Logo of The Global Observer"
+			/></a>
+		</div>
+		<!-- <section id="temp-analysis">
+			<div class="comment">
+				<article>
+					<h1>Cherry blossom's full-bloom date and temperature</h1>
+					<p>
+						<a
+							href="http://www.jma.go.jp/jma/menu/menureport.html"
+							target="_blank"
+							>Japan Meteorological Agency</a
+						>
+						releases monthly temperature data since 1880 in Kyoto,
+						Japan.
+					</p>
+					<p>
+						Many meteorologists say cherry blossoms' first-blooming
+						and full-blooming are closely related to temperature in
+						the previous winter and early spring.
+					</p>
+					<p>
+						I downloaded monthly average temperature data from
+						November to March since 1880, as well as average
+						temperature every 10 days during that time (early
+						November, mid-November, late November, ... to late
+						March).
+					</p>
+					<p>
+						I'm going to represent the temperatrue data as a form of
+						flower.
+					</p>
+				</article>
+			</div>
+			<div id="rader-sample">
+				<div id="rader-sample__chart">
+					<img
+						class="arrow"
+						src="asset/arrow.svg"
+						alt=""
+						width="50"
+					/>
+				</div>
+				<div id="rader-sample__explanation">
+					<div class="step" data-index="0">
+						<p>
+							The size of each petal is encoded by monthly average
+							temperature.
+						</p>
+					</div>
+					<div class="step" data-index="1">
+						<p>
+							This petal's size represents average temperature in
+							November.
+						</p>
+					</div>
+					<div class="step" data-index="2">
+						<p>This shows average temperature in March.</p>
+					</div>
+					<div class="step" data-index="3">
+						<p>
+							The length of each thred represents 10-day average
+							temperature.
+						</p>
+					</div>
+					<div class="step" data-index="4">
+						<p>From early November to...</p>
+					</div>
+					<div class="step" data-index="5">
+						<p>Late March.</p>
+					</div>
+					<div class="step" data-index="6">
+						<p>
+							Scroll down and click flowers to explore first-bloom
+							dates and monthly/10-day-average temperatures.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div id="rader-chart__container">
+				<div id="rader-chart"><div class="rader-tooltip"></div></div>
+				<div id="rader-zoomed-chart">
+					<div class="rader-zoomed-tooltip"></div>
+				</div>
+			</div>
+		</section> -->
+		<script src="scripts/config.js"></script>
+		<script src="scripts/script.js"></script>
+		<!-- <script src="scripts/radarChart.js"></script>
+		<script src="scripts/tempData.js"></script> -->
+	</body>
+</html>
