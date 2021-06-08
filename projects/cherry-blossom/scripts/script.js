@@ -37,7 +37,7 @@ const svgH = d3
 	.select("#kyoto1200__histogram")
 	.append("svg")
 	.attr("width", size.w)
-	.attr("height", windowH * 0.3);
+	.attr("height", windowH * 0.6);
 
 const svgS = d3
 	.select("#kyoto1200__scatterplot")
@@ -54,16 +54,23 @@ const containerSG = svgS.append("g").classed("container-scatterplot", true);
 const histogramContainer = document.querySelector(".container-histogram");
 
 let filteredData,
+	dataAfter1900,
+	groupedByDate,
+	groupedDataAfter1900,
 	xScale,
 	xScaleSub,
 	yScaleSub,
 	yScaleHistogram,
+	yScaleHistogramAfter1900,
 	yScaleScatterplot,
 	colorScale,
 	angleScale,
-	angles,
+	xAxisH,
+	yAxisH,
+	xAxisLabelH,
+	yAxisLabelH,
+	horizontalLineH,
 	draggableLine,
-	// avgLine,
 	availableYears;
 
 Promise.all([d3.csv("data/sakura.csv"), d3.text("asset/petal.svg")]).then(
@@ -76,10 +83,14 @@ Promise.all([d3.csv("data/sakura.csv"), d3.text("asset/petal.svg")]).then(
 			return d.date_doy !== "NA";
 		});
 		filteredData.forEach(parseData);
-		console.log(filteredData);
-		availableYears = filteredData.map((d) => d.year);
 
-		draw(filteredData);
+		availableYears = filteredData.map((d) => d.year);
+		dataAfter1900 = filteredData.filter((d) => {
+			return d.year >= 1900;
+		});
+		groupedDataAfter1900 = groupData(dataAfter1900);
+
+		draw();
 		scrolly();
 		interactive();
 	}
@@ -93,11 +104,15 @@ function parseData(d) {
 	d.doy_100yr = +d.doy_100yr;
 }
 
-function draw(data) {
-	let filteredData = data;
-	let groupedByDate = d3.group(filteredData, (d) => d.date_doy);
-	groupedByDate = Array.from(groupedByDate);
-	groupedByDate = groupedByDate.sort((a, b) => a[0] - b[0]);
+function groupData(data) {
+	let groupedData = d3.group(data, (d) => d.date_doy);
+	groupedData = Array.from(groupedData);
+	groupedData = groupedData.sort((a, b) => a[0] - b[0]);
+	return groupedData;
+}
+
+function draw() {
+	groupedByDate = groupData(filteredData);
 	// ----------- CREATE SCALES -----------
 	xScale = d3
 		.scaleLinear()
@@ -142,7 +157,7 @@ function draw(data) {
 	angleScale = d3
 		.scaleLinear()
 		.domain(d3.extent(filteredData, (d) => d.tempC))
-		.range([-144, 144]);
+		.range([144, -144]);
 
 	// ----------- TITLE -----------
 	let scatterplotTitleG = containerTitleG
@@ -208,40 +223,6 @@ function draw(data) {
 		.append("text")
 		.text((d) => d);
 
-	// let shapeWidth = windowW * 0.045 > 50 ? 50 : windowW * 0.045;
-
-	// let colorLegend = d3
-	// 	.legendColor()
-	// 	.labelFormat(d3.format("d"))
-	// 	.title("Year")
-	// 	.shapeWidth(windowW > 576 ? shapeWidth : 50)
-	// 	.cells(windowW > 576 ? 5 : 3)
-	// 	.orient("horizontal")
-	// 	.scale(colorScale);
-
-	// containerSubG
-	// 	.append("g")
-	// 	.classed("color-legend sub sub-1", true)
-	// 	.attr("transform", `translate(${windowW > 576 ? 30 : 20}, ${margin.t})`)
-	// 	.call(colorLegend);
-
-	// d3.select(".legendTitle").attr("transform", "translate(0, 10)");
-
-	// angles =
-	// 	windowW > 650
-	// 		? [
-	// 				{ temp: 53.2, angle: -144 },
-	// 				{ temp: 48.4, angle: -72 },
-	// 				{ temp: 43.5, angle: 0 },
-	// 				{ temp: 38.7, angle: 72 },
-	// 				{ temp: 33.8, angle: 144 },
-	// 		  ]
-	// 		: [
-	// 				{ temp: 53.2, angle: -144 },
-	// 				{ temp: 43.5, angle: 0 },
-	// 				{ temp: 33.8, angle: 144 },
-	// 		  ];
-
 	let angleLegendG = d3
 		.select("#sub-legend")
 		.append("g")
@@ -264,45 +245,6 @@ function draw(data) {
 		.append("img")
 		.classed("angle-legend-img", true)
 		.attr("src", "asset/angle-legend.png");
-
-	// let containerSubCellsG = angleLegendG
-	// 	.selectAll("g.angle-legend-petal")
-	// 	.data(angles)
-	// 	.enter()
-	// 	.append("g")
-	// 	.classed("angle-legend-petal", true)
-	// 	.attr(
-	// 		"transform",
-	// 		(d, i) =>
-	// 			`translate(${
-	// 				windowW > 576 ? i * 45 + margin.l : i * 50 + 50
-	// 			}, ${windowW > 576 ? 150 : 130}) rotate(${d.angle})`
-	// 	);
-
-	// containerSubCellsG
-	// 	.append("use")
-	// 	.attr("xlink:href", "#petal-svg")
-	// 	.attr("fill", "#f880aa")
-	// 	.attr("fill-opacity", 0.8)
-	// 	.attr("stroke-width", 0.5)
-	// 	.attr("stroke", "#ccc");
-
-	// angleLegendG
-	// 	.selectAll("g.angle-legend-label")
-	// 	.data(angles)
-	// 	.enter()
-	// 	.append("g")
-	// 	.classed("angle-legend-label", true)
-	// 	.attr(
-	// 		"transform",
-	// 		(d, i) =>
-	// 			`translate(${
-	// 				windowW > 576 ? i * 45 + margin.l : i * 50 + 50
-	// 			}, ${windowW > 576 ? 180 : 160})`
-	// 	)
-	// 	.attr("text-anchor", "middle")
-	// 	.append("text")
-	// 	.text((d) => d.temp);
 
 	if (windowW > 576) {
 		let scatterplotSubG = containerSubG
@@ -333,7 +275,7 @@ function draw(data) {
 				})`
 			)
 			.append("text")
-			.text("Days after Jan. 1");
+			.text("Full-bloom date (days after Jan. 1)");
 
 		let yAxisSubLabel = scatterplotSubG
 			.append("g")
@@ -390,28 +332,28 @@ function draw(data) {
 		.classed("histogram-title", true)
 		.attr("transform", `translate(${margin.l - 20}, 30)`)
 		.append("text")
-		.text("Cherry blossom's full-blooming date");
+		.classed("histogram-title-text", true)
+		.text("Full-bloom date");
 
-	let xAxisBottom = d3.axisBottom(xScale);
-	containerHG
+	xAxisH = containerHG
 		.append("g")
 		.classed("axis", true)
 		.attr("transform", `translate(0, ${windowH * 0.3 - margin.b})`)
-		.call(xAxisBottom);
-	containerHG
+		.call(d3.axisBottom(xScale));
+
+	xAxisLabelH = containerHG
 		.append("text")
 		.classed("x-axis-label", true)
 		.attr("transform", `translate(${size.w - 20}, ${windowH * 0.3 - 20})`)
 		.text("(days after Jan. 1)");
 
-	let yAxisH = d3.axisLeft(yScaleHistogram).ticks(5);
-	containerHG
+	yAxisH = containerHG
 		.append("g")
 		.classed("axis", true)
 		.attr("transform", `translate(${margin.l}, 0)`)
-		.call(yAxisH);
+		.call(d3.axisLeft(yScaleHistogram).ticks(5));
 
-	let yAxisLabelH = containerHG
+	yAxisLabelH = containerHG
 		.append("g")
 		.classed("axis-label", true)
 		.attr(
@@ -430,17 +372,24 @@ function draw(data) {
 			if (idx == -1) {
 				return;
 			} else {
-				data.count = idx;
+				data.count = idx + 1;
+			}
+		});
+		groupedDataAfter1900.forEach((el) => {
+			idx = el[1].findIndex((d) => d === data);
+			if (idx == -1) {
+				return;
+			} else {
+				data.countAfter1900 = idx + 1;
 			}
 		});
 	});
 
-	let horizontalLineH = [10, 20, 30, 40, 50];
+	horizontalLineH = [10, 20, 30, 40, 50];
 	containerHG
 		.selectAll("g.h-line")
 		.data(horizontalLineH)
-		.enter()
-		.append("g")
+		.join("g")
 		.classed("h-line", true)
 		.append("line")
 		.attr("x1", margin.l)
@@ -450,29 +399,24 @@ function draw(data) {
 		.attr("stroke", "#ccc")
 		.attr("stroke-width", 0.5);
 
-	// avgLine = containerHG.append("g").classed("avg-line", true);
+	let medianLine = containerHG.append("g").classed("median-line", true);
 
-	// avgLine
-	// 	.append("line")
-	// 	.attr("x1", xScale(102.87))
-	// 	.attr("y1", yScaleHistogram(0))
-	// 	.attr("x2", xScale(102.87))
-	// 	.attr(
-	// 		"y2",
-	// 		yScaleHistogram(d3.max(groupedByDate, (d) => d[1].length) + 1)
-	// 	)
-	// 	.attr("stroke", "lightgray")
-	// 	.attr("stroke-width", 3);
+	medianLine
+		.append("rect")
+		.attr("x", xScale(103.5))
+		.attr("y", margin.t)
+		.attr("width", xScale(104.5) - xScale(103.5))
+		.attr("height", windowH * 0.3 - margin.t - 35)
+		.attr("fill", "white")
+		.attr("stroke", "#ffbf00")
+		.attr("stroke-width", 3);
 
-	// avgLine
-	// 	.append("g")
-	// 	.classed("avg-text", true)
-	// 	.attr(
-	// 		"transform",
-	// 		`translate(${xScale(102.87) + 10}, ${yScaleHistogram(55)})`
-	// 	)
-	// 	.append("text")
-	// 	.text(`802~902 avg: 102.87`);
+	medianLine
+		.append("g")
+		.classed("median-text", true)
+		.attr("transform", `translate(${xScale(105)}, ${margin.t + 5})`)
+		.append("text")
+		.text("Median: 104 days");
 
 	let histogramG = containerHG
 		.selectAll("g.histogram-petal")
@@ -490,6 +434,7 @@ function draw(data) {
 
 	histogramG
 		.append("use")
+		.attr("class", (d) => (d.year < 1900 ? "ancient" : "modern"))
 		.attr("id", (d) => `histogram-${d.year}`)
 		.attr("xlink:href", "#petal-svg")
 		.attr("fill", (d) => colorScale(d.year))
@@ -507,6 +452,112 @@ function draw(data) {
 		.attr("x", (d) => xScale(d[0]))
 		.attr("y", (d) => yScaleHistogram(d[1].length) - 7)
 		.text((d) => d[1].length);
+
+	// ---------- AFTER 1900 ----------
+	yScaleHistogramAfter1900 = d3
+		.scaleLinear()
+		.domain([0, 13])
+		.range([windowH * 0.3 - margin.b, margin.t + 20]);
+
+	containerHAfter1900G = containerHG
+		.append("g")
+		.classed("histogram after1900", true)
+		.attr("transform", `translate(0, ${windowH * 0.3 - 30})`);
+
+	let horizontalLineAfter1900H = [5, 10];
+	containerHAfter1900G
+		.selectAll("g.h-lineAfter1900")
+		.data(horizontalLineAfter1900H)
+		.join("g")
+		.classed("h-lineAfter1900", true)
+		.append("line")
+		.attr("x1", margin.l)
+		.attr("y1", (d) => yScaleHistogramAfter1900(d))
+		.attr("x2", size.w - margin.r)
+		.attr("y2", (d) => yScaleHistogramAfter1900(d))
+		.attr("stroke", "#ccc")
+		.attr("stroke-width", 0.5);
+
+	let medianLineAfter1900 = containerHAfter1900G
+		.append("g")
+		.classed("after1900", true);
+
+	medianLineAfter1900
+		.append("rect")
+		.attr("x", xScale(97.5))
+		.attr("y", margin.t + 35)
+		.attr("width", xScale(98.5) - xScale(97.5))
+		.attr("height", windowH * 0.3 - margin.t - 75)
+		.attr("fill", "none")
+		.attr("stroke", "#ffbf00")
+		.attr("stroke-width", 3);
+
+	medianLineAfter1900
+		.append("g")
+		.classed("median-text", true)
+		.attr("transform", `translate(${xScale(99)}, ${margin.t + 40})`)
+		.append("text")
+		.text("Median: 98 days");
+
+	let line2021 = containerHAfter1900G.append("g").classed("line-2021", true);
+
+	line2021
+		.append("rect")
+		.attr("x", xScale(83.5))
+		.attr("y", windowH * 0.3 - margin.b - 20)
+		.attr("width", xScale(84.5) - xScale(83.5))
+		.attr("height", 30)
+		.attr("fill", "none")
+		.attr("stroke", "#ffbf00")
+		.attr("stroke-width", 3);
+
+	line2021
+		.append("g")
+		.classed("median-text", true)
+		.attr(
+			"transform",
+			`translate(${xScale(83.5)}, ${windowH * 0.3 - margin.b - 30})`
+		)
+		.append("text")
+		.text("2021: 84 days");
+
+	containerHAfter1900G
+		.append("g")
+		.classed("histogram-title after1900", true)
+		.attr("transform", `translate(${margin.l - 20}, 30)`)
+		.append("text")
+		.classed("histogram-title-text", true)
+		.text("Full-bloom date (1900-2021)");
+
+	containerHAfter1900G
+		.append("g")
+		.classed("axis after1900", true)
+		.attr("transform", `translate(0, ${windowH * 0.3 - margin.b})`)
+		.call(d3.axisBottom(xScale));
+
+	containerHAfter1900G
+		.append("g")
+		.classed("axis after1900", true)
+		.attr("transform", `translate(${margin.l}, 0)`)
+		.call(d3.axisLeft(yScaleHistogramAfter1900).ticks(3));
+
+	containerHAfter1900G
+		.append("text")
+		.classed("x-axis-label", true)
+		.attr("transform", `translate(${size.w - 20}, ${windowH * 0.3 - 20})`)
+		.text("(days after Jan. 1)");
+
+	containerHAfter1900G
+		.append("g")
+		.classed("axis-label", true)
+		.attr(
+			"transform",
+			`rotate(-90) translate(${-(windowH * 0.3) / 2} ${
+				margin.l / 2 + 10
+			})`
+		)
+		.append("text")
+		.text("Count");
 
 	// ---------- SCATTERPLOT -----------
 	let yAxisS = d3.axisLeft(yScaleScatterplot).tickFormat(d3.format("d"));
@@ -596,24 +647,6 @@ function draw(data) {
 	scrollButton.append("span");
 	scrollButton.append("span");
 	scrollButton.append("span");
-
-	// d3
-	// 	.select("#kyoto1200__scatterplot")
-	// 	.append("div")
-	// 	.classed("comment", true)
-	// 	.append("article")
-	// 	.append("p").html(`In 2018, full-blooming was earliest tie at that time
-	//   (March 28th, 86 days after January 1st). In 2021,
-	//   cherry blossoms in Kyoto peaked earliest on record,
-	//   fully-blooming on March 26th (84 days after January
-	//   1st).<br><br> After 1900, out of 122 years of data, 105 years of full-blooming occured
-	//   before the average date (105 days after Jan. 1) until that year.`);
-
-	// d3.select("#kyoto1200__scatterplot")
-	// 	.append("div")
-	// 	.classed("go-back-to-top", true)
-	// 	.append("p")
-	// 	.html(`<a href="#intro">Go back to top</a>`);
 }
 
 // window.onresize = function () {
@@ -649,349 +682,3 @@ function draw(data) {
 // 	draw(filteredData);
 // 	interactive();
 // };
-
-function scrolly() {
-	enterView({
-		selector: "div.step",
-		enter: (el) => {
-			let index = +d3.select(el).attr("data-index");
-			d3.selectAll(".step").style("opacity", 0.1);
-			d3.select(el).style("opacity", 1);
-			d3.selectAll("g.sub").style("opacity", 0.1);
-			d3.select(`g.sub-${index}`).style("opacity", 1);
-			if (index === 4) {
-				d3.selectAll("g.sub").style("opacity", 1);
-			}
-		},
-		exit: (el) => {
-			let index = +d3.select(el).attr("data-index");
-			d3.select(el).style("opacity", 0.1);
-			d3.select(`.step[data-index="${index - 1}"]`).style("opacity", 1);
-			d3.selectAll("g.sub").style("opacity", 0.1);
-			d3.select(`g.sub-${index - 1}`).style("opacity", 1);
-		},
-		offset: 0.5,
-	});
-}
-
-function interactive() {
-	// HISTOGRAM TOOLTIP
-	d3.selectAll(".histogram-petal")
-		.on("mouseover", function (e, d) {
-			d3.select(this)
-				.selectChild()
-				.attr("fill-opacity", 1)
-				.attr("stroke-width", 3)
-				.attr("stroke", "black");
-			let x = xScale(d.date_doy);
-			let y = yScaleHistogram(d.count);
-			d3.select(".histogram-tooltip")
-				.style("top", `${y + 10}px`)
-				.style(
-					"left",
-					d.date_doy < 105 ? `${x + 10}px` : `${x - 230}px`
-				)
-				.style("visibility", "visible")
-				.html(
-					`<span class="dim">Year:</span> <b>${d.year}</b><br><span class="dim">Full-bloom date:</span> <b>${d.month} ${d.day}</b><br><span class="dim">Temperature:</span> <b>${d.tempF} (F)</b><br><span class="dim">Source:</span> <b>${d.source}</b><br>`
-				);
-		})
-		.on("mouseout", function () {
-			d3.select(this)
-				.selectChild()
-				.attr("fill-opacity", 0.8)
-				.attr("stroke-width", 0.5)
-				.attr("stroke", "#ccc");
-			d3.select(".histogram-tooltip").style("visibility", "hidden");
-		});
-
-	// SCATTERPLOT TOOLTIP
-	d3.selectAll(".scatterplot-petal")
-		.on("mouseover", function (e, d) {
-			d3.selectAll(".scatterplot-petal")
-				.selectChild()
-				.attr("fill-opacity", 0.8)
-				.attr("stroke-width", 0.5)
-				.attr("stroke", "#ccc");
-			d3.select(this)
-				.selectChild()
-				.attr("fill-opacity", 1)
-				.attr("stroke-width", 3)
-				.attr("stroke", "black");
-			let x = xScale(d.date_doy);
-			let y = yScaleScatterplot(d.year);
-			d3.select(".scatterplot-tooltip")
-				.style("top", `${y + 10}px`)
-				.style(
-					"left",
-					d.date_doy < 105 ? `${x + 10}px` : `${x - 230}px`
-				)
-				.style("visibility", "visible")
-				.html(
-					`<span class="dim">Year:</span> <b>${d.year}</b><br><span class="dim">Full-bloom date:</span> <b>${d.month} ${d.day}</b><br><span class="dim">Temperature:</span> <b>${d.tempF} (F)</b><br><span class="dim">Source:</span> <b>${d.source}</b><br>`
-				);
-			d3.select(".scatterplot-annotation__point").style(
-				"visibility",
-				"hidden"
-			);
-		})
-		.on("mouseout", function () {
-			d3.select(this)
-				.selectChild()
-				.attr("fill-opacity", 0.8)
-				.attr("stroke-width", 0.5)
-				.attr("stroke", "#ccc");
-			d3.select(".scatterplot-tooltip").style("visibility", "hidden");
-		});
-
-	// DRAGGABLE LINE
-	if (windowW > 576) {
-		draggableLine.call(
-			d3
-				.drag()
-				.on("drag", function (event) {
-					let y = event.y;
-					if (y < yScaleSub(812)) {
-						y = yScaleSub(812);
-					} else if (y > yScaleSub(2021)) {
-						y = yScaleSub(2021);
-					}
-					d3.select(this).attr("y1", y).attr("y2", y);
-				})
-				.on("end", function (event) {
-					d3.select(this).classed("dragged", true);
-					let selectedYear = Math.round(yScaleSub.invert(event.y));
-					let petalToJump = document
-						.querySelector(".container-scatterplot")
-						.querySelector(`#scatterplot-${selectedYear}`);
-					if (petalToJump === null) {
-						selectedYear = availableYears.reduce((prev, curr) => {
-							return Math.abs(curr - selectedYear) <
-								Math.abs(prev - selectedYear)
-								? curr
-								: prev;
-						});
-						petalToJump = document
-							.querySelector(".container-scatterplot")
-							.querySelector(`#scatterplot-${selectedYear}`);
-					}
-					petalToJump.scrollIntoView({
-						block: "center",
-						inline: "nearest",
-					});
-					setTimeout(() => {
-						d3.select(this).classed("dragged", false);
-					}, 1000);
-				})
-		);
-	}
-
-	// ADD ANNOTATIONS
-	points.forEach((year) => {
-		let thisPetal = d3.select(`use#scatterplot-${year}`);
-		thisPetal.classed("toAnnotate", true);
-	});
-
-	// SHOW ANNOTATION POINTS
-	enterView({
-		selector: ".toAnnotate",
-		enter: function (el) {
-			let year = +el.getAttribute("id").slice(12);
-			let data = d3.select(el).data();
-			d3.selectAll(".scatterplot-petal")
-				.selectChild()
-				.attr("fill-opacity", 0.8)
-				.attr("stroke-width", 0.5)
-				.attr("stroke", "#ccc");
-			d3.select(el)
-				.attr("fill-opacity", 1)
-				.attr("stroke-width", 3)
-				.attr("stroke", "black");
-
-			let x = xScale(data[0].date_doy);
-			let y = yScaleScatterplot(year);
-			let i = annotation.findIndex((el) => el.year === year);
-			d3.select(".scatterplot-annotation__point")
-				.style("top", `${y + 10}px`)
-				.style(
-					"left",
-					data[0].date_doy < 105 ? `${x + 10}px` : `${x - 300}px`
-				)
-				.style("visibility", "visible")
-				.html(
-					`<div class="x-closing" onclick="hideAnnotation()">x</div><span class="dim">Year:</span> <b>${year}</b><br><span class="dim">Full-bloom date:</span> <b>${data[0].month} ${data[0].day}</b><br><span class="dim">Temperature:</span> <b>${data[0].tempF} (F)</b><br><span class="dim">Source:</span> <b>${data[0].source}</b><br><br><br>${annotation[i].comment}`
-				);
-		},
-		exit: function (el) {
-			d3.select(el)
-				.attr("fill-opacity", 0.8)
-				.attr("stroke-width", 0.5)
-				.attr("stroke", "#ccc");
-			let year = +el.getAttribute("id").slice(12);
-			let i = annotation.findIndex((el) => el.year === year);
-			if (i === 0) {
-				d3.select(".scatterplot-annotation__point").style(
-					"visibility",
-					"hidden"
-				);
-			} else {
-				let prevYear = i !== 8 ? points[i - 1] : points[4];
-				let prevPetal = d3.select(`#scatterplot-${prevYear}`);
-				prevPetal
-					.attr("fill-opacity", 1)
-					.attr("stroke-width", 3)
-					.attr("stroke", "black");
-				let prevData = prevPetal.data();
-				let x = xScale(prevData[0].date_doy);
-				let y = yScaleScatterplot(prevYear);
-				d3.select(".scatterplot-annotation__point")
-					.style("top", `${y + 10}px`)
-					.style(
-						"left",
-						prevData[0].date_doy < 105
-							? `${x + 10}px`
-							: `${x - 300}px`
-					)
-					.style("visibility", "visible")
-					.html(
-						`<div class="x-closing" onclick="hideAnnotation()">x</div><span class="dim">Year:</span> <b>${prevYear}</b><br><span class="dim">Full-bloom date:</span> <b>${
-							prevData[0].month
-						} ${
-							prevData[0].day
-						}</b><br><span class="dim">Temperature:</span> <b>${
-							prevData[0].tempF
-						} (F)</b><br><span class="dim">Source:</span> <b>${
-							prevData[0].source
-						}</b><br><br><br>${annotation[i - 1].comment}`
-					);
-			}
-		},
-		offset: 0.3,
-	});
-
-	// SHOW ANNOTATION LINES
-	enterView({
-		selector: "g.annotation-line",
-		enter: function (el) {
-			let year = +d3.select(el).select("line").attr("id");
-			let i = annotation.findIndex((el) => el.year === year);
-			let y = yScaleScatterplot(year);
-			d3.select(".scatterplot-annotation__line")
-				.style("top", year === 1880 ? `${y - 80}px` : `${y + 2}px`)
-				.style(
-					"left",
-					year === 1953
-						? `${size.w - margin.r - 250}px`
-						: `${margin.l}px`
-				)
-				.style("visibility", "visible")
-				.html(`${annotation[i].comment}`);
-		},
-		exit: function (el) {
-			let year = +d3.select(el).select("line").attr("id");
-			let yearI = lines.findIndex((el) => el === year);
-			if (yearI === 0) {
-				d3.select(".scatterplot-annotation__line").style(
-					"visibility",
-					"hidden"
-				);
-			} else {
-				let prevYear = lines[yearI - 1];
-				let i = annotation.findIndex((el) => el.year === prevYear);
-				let y = yScaleScatterplot(prevYear);
-				d3.select(".scatterplot-annotation__line")
-					.style(
-						"top",
-						prevYear === 1880 ? `${y - 80}px` : `${y + 2}px`
-					)
-					.style("left", `${margin.l}px`)
-					.html(`${annotation[i].comment}`);
-			}
-		},
-		offset: 0.3,
-	});
-
-	// FORM HISTOGRAM
-	enterView({
-		selector: "g.scatterplot-petal",
-		enter: function (el) {
-			let id = el.children[0].getAttribute("id").slice(12);
-			let histogramPetalEl = histogramContainer.querySelector(
-				`use#histogram-${id}`
-			);
-			histogramPetalEl.parentElement.classList.add(
-				"histogram-petal-active"
-			);
-			if (windowW > 576) {
-				if (draggableLine.classed("dragged")) {
-					return;
-				} else {
-					draggableLine
-						.transition()
-						.attr("y1", yScaleSub(id))
-						.attr("y2", yScaleSub(id));
-				}
-			}
-			// if (id > 902) {
-			// 	let avg = el.__data__.doy_100yr;
-			// 	avgLine
-			// 		.select("line")
-			// 		.attr("x1", xScale(avg))
-			// 		.attr("x2", xScale(avg));
-			// }
-		},
-		exit: function (el) {
-			let id = el.children[0].getAttribute("id").slice(12);
-			let histogramPetalEl = histogramContainer.querySelector(
-				`use#histogram-${id}`
-			);
-			histogramPetalEl.parentElement.classList.remove(
-				"histogram-petal-active"
-			);
-			if (windowW > 576) {
-				if (draggableLine.classed("dragged")) {
-					return;
-				} else {
-					draggableLine
-						.transition()
-						.attr("y1", yScaleSub(id))
-						.attr("y2", yScaleSub(id));
-				}
-			}
-		},
-		offset: 0.7,
-	});
-
-	// enterView({
-	// 	selector: "#scatterplot-902",
-	// 	enter: function (el) {
-	// 		d3.select(".avg-line").style("opacity", 1);
-	// 	},
-	// 	exit: function (el) {
-	// 		d3.select(".avg-line").style("opacity", 0);
-	// 	},
-	// 	offset: 0.7,
-	// });
-
-	// SHOW FINAL COUNTS
-	enterView({
-		selector: ".scrollButtonCenter",
-		enter: function (el) {
-			d3.selectAll(".count").style("opacity", 1);
-		},
-		exit: function (el) {
-			d3.selectAll(".count").style("opacity", 0);
-		},
-		offset: 0.8,
-	});
-}
-
-// HIDE ANNOTATIONS
-function hideAnnotation() {
-	d3.select(".scatterplot-annotation__point").style("visibility", "hidden");
-	d3.selectAll(".scatterplot-petal")
-		.selectChild()
-		.attr("fill-opacity", 0.8)
-		.attr("stroke-width", 0.5)
-		.attr("stroke", "#ccc");
-}

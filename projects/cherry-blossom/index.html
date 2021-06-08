@@ -91,15 +91,15 @@
 
 		<section id="kyoto1200">
 			<div id="sub">
-				<div id="sub-legend"></div>
 				<div id="sub-chart"></div>
+				<div id="sub-legend"></div>
 			</div>
 			<div id="main">
 				<div id="kyoto1200__histogram">
 					<div class="histogram-tooltip"></div>
 				</div>
 				<div id="explanation" class="scrolly">
-					<div class="step" data-index="0">
+					<div class="explanation__step step" data-index="0">
 						<p>
 							This chart shows cherry blossom's peak dates from
 							812 to 2021. Cherry blossom petals are placed to
@@ -116,7 +116,7 @@
 							<span></span><span></span><span></span>
 						</div>
 					</div>
-					<div class="step" data-index="1">
+					<div class="explanation__step step" data-index="1">
 						<p>
 							Petal colors represent the year, from 812 to 2021.
 						</p>
@@ -124,7 +124,7 @@
 							<span></span><span></span><span></span>
 						</div>
 					</div>
-					<div class="step" data-index="2">
+					<div class="explanation__step step" data-index="2">
 						<p>
 							Angles of petals indicate the year's average March
 							temperature data (F).
@@ -155,7 +155,7 @@
 							<span></span><span></span><span></span>
 						</div>
 					</div>
-					<div class="step" data-index="3">
+					<div class="explanation__step step" data-index="3">
 						<p>
 							This chart will show the number of observations of
 							peak-blooming dates.
@@ -164,21 +164,54 @@
 							<span></span><span></span><span></span>
 						</div>
 					</div>
-					<div class="step" data-index="4">
+					<div class="explanation__step step" data-index="4">
 						<h2>Cherry blossom's full-blooming date in Kyoto</h2>
 						<div class="scrollButton">
 							<span></span><span></span><span></span>
 						</div>
 					</div>
 				</div>
-				<div id="kyoto1200__scatterplot">
-					<div class="scatterplot-tooltip"></div>
-					<div class="scatterplot-annotation__point"></div>
-					<div class="scatterplot-annotation__line"></div>
+				<div class="scatterplot__container">
+					<div id="kyoto1200__scatterplot">
+						<div class="scatterplot-tooltip"></div>
+						<div class="scatterplot-annotation__point"></div>
+						<div class="scatterplot-annotation__line"></div>
+					</div>
+					<div id="analysis">
+						<div class="analysis__step step" data-index="0">
+							<p>
+								The median date for full blooming between 812
+								and 2021 is 104 days after Jan. 1.
+							</p>
+							<div class="scrollButton">
+								<span></span><span></span><span></span>
+							</div>
+						</div>
+						<div class="analysis__step step" data-index="1">
+							<p>
+								It was the same between 812 and 1899. But it has
+								been getting earlier and earlier.
+							</p>
+							<p>
+								Between 1900 and 2021, the median date is 98
+								days.
+							</p>
+							<div class="scrollButton">
+								<span></span><span></span><span></span>
+							</div>
+						</div>
+						<div class="analysis__step step" data-index="2">
+							<p>
+								In 2021, the cherry blossoms in Kyoto set a new
+								early record for peaking, fully blooming 84 days
+								after Jan. 1, on March 26.
+							</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
-		<section id="tile">
+		<!-- <section id="tile">
 			<article>
 				<p>
 					The median date for full blooming has been getting earlier
@@ -198,8 +231,13 @@
 					>
 				</p>
 			</article>
-		</section>
+		</section> -->
 		<div id="footer">
+			<p>
+				<a href="https://yuriko-schumacher.github.io/sakura"
+					>Go back to top</a
+				>
+			</p>
 			<a href="https://gobserver.net/"
 				><img
 					class="logo"
@@ -292,6 +330,7 @@
 		</section> -->
 		<script src="scripts/config.js"></script>
 		<script src="scripts/script.js"></script>
+		<script src="scripts/interactive.js"></script>
 		<!-- <script src="scripts/radarChart.js"></script>
 		<script src="scripts/tempData.js"></script> -->
 	</body>

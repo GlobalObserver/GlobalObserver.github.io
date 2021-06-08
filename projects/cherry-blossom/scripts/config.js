@@ -57,4 +57,3 @@ const points = annotation
 const lines = annotation
 	.filter((el) => el.category === "line")
 	.map((el) => el.year);
-console.log(lines);
