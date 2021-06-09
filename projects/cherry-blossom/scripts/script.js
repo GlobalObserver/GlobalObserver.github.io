@@ -14,20 +14,20 @@ const size = {
 };
 
 const sizeTitleChart = {
-	w: Math.floor(document.querySelector("#title-chart").clientWidth) - 1,
-	h: Math.floor(document.querySelector("#title-chart").clientHeight),
+	w: document.querySelector("#title-chart").clientWidth,
+	h: document.querySelector("#title-chart").clientHeight,
 };
 
 const sizeSub = {
-	w: Math.floor(document.querySelector("#sub-chart").clientWidth) - 1,
-	h: Math.floor(document.querySelector("#sub-chart").clientHeight) - 1,
+	w: document.querySelector("#sub-chart").clientWidth,
+	h: document.querySelector("#sub-chart").clientHeight,
 };
-let petalSize = windowW > 576 ? windowW / 1425 : 0.8;
+let petalSize = windowW > 576 ? windowW / 1425 : 0.6;
 
 const svgTitle = d3
 	.select("#title-chart")
 	.append("svg")
-	.attr("width", sizeTitleChart.w + 20)
+	.attr("width", windowW > 576 ? sizeTitleChart.w + 20 : sizeTitleChart.w)
 	.attr("height", sizeTitleChart.h);
 
 const svgSub = d3
@@ -126,12 +126,18 @@ function draw() {
 	xScaleTitle = d3
 		.scaleLinear()
 		.domain([83, 125])
-		.range([20, sizeTitleChart.w + 20]);
+		.range([
+			windowW > 576 ? 20 : 0,
+			windowW > 576 ? sizeTitleChart.w + 20 : sizeTitleChart.w,
+		]);
 
 	xScaleSub = d3
 		.scaleLinear()
 		.domain([83, 125])
-		.range([margin.l, windowW * 0.3 - margin.r * 2]);
+		.range([
+			margin.l,
+			windowW > 576 ? windowW * 0.3 - margin.r * 2 : sizeSub.w - margin.r,
+		]);
 
 	yScaleTitle = d3
 		.scaleLinear()
@@ -250,84 +256,84 @@ function draw() {
 		.classed("angle-legend-img", true)
 		.attr("src", "asset/angle-legend.png");
 
-	if (windowW > 576) {
-		let scatterplotSubG = containerSubG
-			.append("g")
-			.classed("scatterplot-sub sub sub-0", true);
+	let scatterplotSubG = containerSubG
+		.append("g")
+		.classed("scatterplot-sub sub sub-0", true);
 
-		let xAxisSub = d3.axisBottom(xScaleSub);
-		scatterplotSubG
-			.append("g")
-			.classed("x-axis-sub", true)
-			.attr("transform", `translate(0, ${sizeSub.h - margin.b})`)
-			.call(xAxisSub);
+	let xAxisSub = d3.axisBottom(xScaleSub);
+	scatterplotSubG
+		.append("g")
+		.classed("x-axis-sub", true)
+		.attr("transform", `translate(0, ${sizeSub.h - margin.b})`)
+		.call(xAxisSub);
 
-		let yAxisSub = d3.axisLeft(yScaleSub).tickFormat(d3.format("d"));
-		scatterplotSubG
-			.append("g")
-			.classed("y-axis-sub", true)
-			.attr("transform", `translate(${margin.l}, 0)`)
-			.call(yAxisSub);
+	let yAxisSub = d3.axisLeft(yScaleSub).tickFormat(d3.format("d"));
+	scatterplotSubG
+		.append("g")
+		.classed("y-axis-sub", true)
+		.attr("transform", `translate(${margin.l}, 0)`)
+		.call(yAxisSub);
 
-		let xAxisSubLabel = scatterplotSubG
-			.append("g")
-			.classed("axis-sub-label", true)
-			.attr(
-				"transform",
-				`translate(${margin.l + (sizeSub.w - margin.l) / 2}, ${
-					sizeSub.h - margin.b + 30
+	let xAxisSubLabel = scatterplotSubG
+		.append("g")
+		.classed("axis-sub-label", true)
+		.attr(
+			"transform",
+			`translate(${margin.l + (sizeSub.w - margin.l) / 2}, ${
+				sizeSub.h - margin.b + 30
+			})`
+		)
+		.append("text")
+		.text("Full-bloom date (days after Jan. 1)");
+
+	let yAxisSubLabel = scatterplotSubG
+		.append("g")
+		.classed("axis-sub-label", true)
+		.attr(
+			"transform",
+			`rotate(-90) translate(${-sizeSub.h / 2}, ${
+				windowW > 576 ? margin.l / 2 : 15
+			})`
+		)
+		.append("text")
+		.text("Year");
+
+	let petalSubG = scatterplotSubG
+		.selectAll("g.sub-petal")
+		.data(filteredData)
+		.enter()
+		.append("g")
+		.classed("sub-petal", true)
+		.attr(
+			"transform",
+			(d) =>
+				`translate(${xScaleSub(d.date_doy)}, ${yScaleSub(
+					d.year
+				)}) rotate(${angleScale(d.tempC)}) scale(${
+					windowW > 576 ? 0.5 * petalSize : 0.8 * petalSize
 				})`
-			)
-			.append("text")
-			.text("Full-bloom date (days after Jan. 1)");
+		);
 
-		let yAxisSubLabel = scatterplotSubG
-			.append("g")
-			.classed("axis-sub-label", true)
-			.attr(
-				"transform",
-				`rotate(-90) translate(${-sizeSub.h / 2} ${margin.l / 2})`
-			)
-			.append("text")
-			.text("Year");
+	petalSubG
+		.append("use")
+		.attr("id", (d) => `scatterplot-sub-${d.year}`)
+		.attr("xlink:href", "#petal-svg")
+		.attr("fill", (d) => colorScale(d.year))
+		.attr("fill-opacity", 0.8)
+		.attr("stroke-width", 0.3)
+		.attr("stroke", "black");
 
-		let petalSubG = scatterplotSubG
-			.selectAll("g.sub-petal")
-			.data(filteredData)
-			.enter()
-			.append("g")
-			.classed("sub-petal", true)
-			.attr(
-				"transform",
-				(d) =>
-					`translate(${xScaleSub(d.date_doy)}, ${yScaleSub(
-						d.year
-					)}) rotate(${angleScale(d.tempC)}) scale(${
-						0.5 * petalSize
-					})`
-			);
-
-		petalSubG
-			.append("use")
-			.attr("id", (d) => `scatterplot-sub-${d.year}`)
-			.attr("xlink:href", "#petal-svg")
-			.attr("fill", (d) => colorScale(d.year))
-			.attr("fill-opacity", 0.8)
-			.attr("stroke-width", 0.3)
-			.attr("stroke", "black");
-
-		draggableLine = scatterplotSubG
-			.append("g")
-			.append("line")
-			.attr("id", "draggable-line")
-			.attr("draggable", true)
-			.attr("x1", xScaleSub(83))
-			.attr("y1", yScaleSub(812))
-			.attr("x2", xScaleSub(125))
-			.attr("y2", yScaleSub(812))
-			.attr("stroke", "gray")
-			.attr("stroke-width", 10);
-	}
+	draggableLine = scatterplotSubG
+		.append("g")
+		.append("line")
+		.attr("id", "draggable-line")
+		.attr("draggable", true)
+		.attr("x1", xScaleSub(83))
+		.attr("y1", yScaleSub(812))
+		.attr("x2", xScaleSub(125))
+		.attr("y2", yScaleSub(812))
+		.attr("stroke", "gray")
+		.attr("stroke-width", 10);
 
 	// ----------- MAIN SVG -----------
 	// ---------- HISTOGRAM -----------
@@ -408,54 +414,29 @@ function draw() {
 	medianLine
 		.append("rect")
 		.attr("x", xScale(103.5))
-		.attr("y", margin.t)
+		.attr("y", windowW > 576 ? margin.t : margin.t + 10)
 		.attr("width", xScale(104.5) - xScale(103.5))
-		.attr("height", windowH * 0.3 - margin.t - 35)
-		.attr("fill", "white")
+		.attr(
+			"height",
+			windowW > 576
+				? windowH * 0.3 - margin.t - 35
+				: windowH * 0.3 - margin.t - 45
+		)
+		.attr("fill", "none")
 		.attr("stroke", "#ffbf00")
 		.attr("stroke-width", 3);
 
 	medianLine
 		.append("g")
 		.classed("median-text", true)
-		.attr("transform", `translate(${xScale(105)}, ${margin.t + 5})`)
-		.append("text")
-		.text("Median: 104 days");
-
-	let histogramG = containerHG
-		.selectAll("g.histogram-petal")
-		.data(filteredData)
-		.enter()
-		.append("g")
-		.classed("histogram-petal", true)
 		.attr(
 			"transform",
-			(d) =>
-				`translate(${xScale(d.date_doy) - 5.7}, ${
-					yScaleHistogram(d.count) - 8.63
-				}) rotate(${angleScale(d.tempC)}) scale(${petalSize})`
-		);
-
-	histogramG
-		.append("use")
-		.attr("class", (d) => (d.year < 1900 ? "ancient" : "modern"))
-		.attr("id", (d) => `histogram-${d.year}`)
-		.attr("xlink:href", "#petal-svg")
-		.attr("fill", (d) => colorScale(d.year))
-		.attr("fill-opacity", 0.8)
-		.attr("stroke-width", 0.5)
-		.attr("stroke", "#ccc");
-
-	containerHG
-		.selectAll("g.count")
-		.data(groupedByDate)
-		.enter()
-		.append("g")
-		.classed("count", true)
+			`translate(${xScale(105)}, ${
+				windowW > 576 ? margin.t + 5 : margin.t + 20
+			})`
+		)
 		.append("text")
-		.attr("x", (d) => xScale(d[0]))
-		.attr("y", (d) => yScaleHistogram(d[1].length) - 7)
-		.text((d) => d[1].length);
+		.text("Median: 104 days");
 
 	// ---------- AFTER 1900 ----------
 	yScaleHistogramAfter1900 = d3
@@ -489,11 +470,11 @@ function draw() {
 	medianLineAfter1900
 		.append("rect")
 		.attr("x", xScale(97.5))
-		.attr("y", yScaleHistogramAfter1900(11))
+		.attr("y", yScaleHistogramAfter1900(10))
 		.attr("width", xScale(98.5) - xScale(97.5))
 		.attr(
 			"height",
-			yScaleHistogramAfter1900(1) - yScaleHistogramAfter1900(13)
+			yScaleHistogramAfter1900(1) - yScaleHistogramAfter1900(12)
 		)
 		.attr("fill", "none")
 		.attr("stroke", "#ffbf00")
@@ -504,7 +485,9 @@ function draw() {
 		.classed("median-text", true)
 		.attr(
 			"transform",
-			`translate(${xScale(99)}, ${yScaleHistogramAfter1900(11)})`
+			`translate(${
+				windowW > 576 ? xScale(99) : xScale(98)
+			}, ${yScaleHistogramAfter1900(11)})`
 		)
 		.append("text")
 		.text("Median: 98 days");
@@ -532,7 +515,7 @@ function draw() {
 			`translate(${xScale(83.5)}, ${yScaleHistogramAfter1900(3)})`
 		)
 		.append("text")
-		.text("2021: 84 days");
+		.text(windowW > 576 ? "2021: 84 days" : "2021");
 
 	containerHAfter1900G
 		.append("g")
@@ -572,12 +555,48 @@ function draw() {
 		.append("text")
 		.text("Count");
 
+	// HISTOGRAM PETALS
+	let histogramG = containerHG
+		.selectAll("g.histogram-petal")
+		.data(filteredData)
+		.enter()
+		.append("g")
+		.classed("histogram-petal", true)
+		.attr(
+			"transform",
+			(d) =>
+				`translate(${xScale(d.date_doy) - 5.7}, ${
+					yScaleHistogram(d.count) - 8.63
+				}) rotate(${angleScale(d.tempC)}) scale(${petalSize})`
+		);
+
+	histogramG
+		.append("use")
+		.attr("class", (d) => (d.year < 1900 ? "ancient" : "modern"))
+		.attr("id", (d) => `histogram-${d.year}`)
+		.attr("xlink:href", "#petal-svg")
+		.attr("fill", (d) => colorScale(d.year))
+		.attr("fill-opacity", 0.8)
+		.attr("stroke-width", 0.5)
+		.attr("stroke", "#ccc");
+
+	containerHG
+		.selectAll("g.count")
+		.data(groupedByDate)
+		.enter()
+		.append("g")
+		.classed("count", true)
+		.append("text")
+		.attr("x", (d) => xScale(d[0]))
+		.attr("y", (d) => yScaleHistogram(d[1].length) - 10)
+		.text((d) => d[1].length);
+
 	// ---------- SCATTERPLOT -----------
 	let yAxisS = d3.axisLeft(yScaleScatterplot).tickFormat(d3.format("d"));
 	containerSG
 		.append("g")
 		.classed("y-axis-s", true)
-		.attr("transform", `translate(100, 0)`)
+		.attr("transform", `translate(${windowW > 576 ? 100 : 70}, 0)`)
 		.call(yAxisS);
 
 	let horizontalLineS = [

@@ -1,5 +1,6 @@
 function scrolly() {
 	// INTRO EXPLANATION
+	let introOffset = windowW > 576 ? 0.5 : 0.3;
 	enterView({
 		selector: "div.explanation__step",
 		enter: (el) => {
@@ -11,6 +12,14 @@ function scrolly() {
 			if (index === 4) {
 				d3.selectAll("g.sub").style("opacity", 1);
 			}
+			if (windowW <= 576) {
+				if (index === 1) {
+					d3.select("#sub-chart")
+						.transition()
+						.duration(1000)
+						.style("visibility", "hidden");
+				}
+			}
 		},
 		exit: (el) => {
 			let index = +d3.select(el).attr("data-index");
@@ -21,8 +30,16 @@ function scrolly() {
 			);
 			d3.selectAll("g.sub").style("opacity", 0.1);
 			d3.select(`g.sub-${index - 1}`).style("opacity", 1);
+			if (windowW <= 576) {
+				if (index === 1) {
+					d3.select("#sub-chart")
+						.transition()
+						.duration(1000)
+						.style("visibility", "visible");
+				}
+			}
 		},
-		offset: 0.5,
+		offset: introOffset,
 	});
 
 	// ANALYSIS
@@ -39,6 +56,13 @@ function scrolly() {
 					.transition()
 					.duration(1000)
 					.style("opacity", 1);
+				if (windowW <= 576) {
+					d3.select("#kyoto1200__histogram")
+						.transition()
+						.duration(1000)
+						.style("top", "0px");
+					d3.select("#sub").style("visibility", "hidden");
+				}
 			} else if (index === 1) {
 				containerHG
 					.selectAll(".count")
@@ -123,6 +147,14 @@ function scrolly() {
 			const histogramPetalG = containerHG.selectAll(".histogram-petal");
 			if (index === 0) {
 				d3.select(".median-line").style("opacity", 0);
+				if (windowW <= 576) {
+					d3.select("#kyoto1200__histogram")
+						.transition()
+						.duration(1000)
+						.style("top", "180px");
+					d3.select("#sub").style("visibility", "visible");
+					d3.select("#sub-chart").style("visibility", "hidden");
+				}
 			} else if (index === 1) {
 				containerHG
 					.selectAll(".count")
@@ -328,7 +360,7 @@ function interactive() {
 		let thisPetal = d3.select(`use#scatterplot-${year}`);
 		thisPetal.classed("toAnnotate", true);
 	});
-
+	let annotationOffset = windowW > 576 ? 0.3 : 0.1;
 	// SHOW ANNOTATION POINTS
 	enterView({
 		selector: ".toAnnotate",
@@ -361,7 +393,9 @@ function interactive() {
 				)
 				.style("visibility", "visible")
 				.html(
-					`<div class="x-closing" onclick="hideAnnotation()">x</div><span class="dim">Year:</span> <b>${year}</b><br><span class="dim">Full-bloom date:</span> <b>${data[0].month} ${data[0].day}</b><br><span class="dim">Temperature:</span> <b>${data[0].tempF} (F)</b><br><span class="dim">Source:</span> <b>${data[0].source}</b><br><br><br>${annotation[i].comment}`
+					windowW > 576
+						? `<div class="x-closing" onclick="hideAnnotation()">x</div><span class="dim">Year:</span> <b>${year}</b><br><span class="dim">Full-bloom date:</span> <b>${data[0].month} ${data[0].day}</b><br><span class="dim">Temperature:</span> <b>${data[0].tempF} (F)</b><br><span class="dim">Source:</span> <b>${data[0].source}</b><br><br><br>${annotation[i].comment}`
+						: `<div class="x-closing" onclick="hideAnnotation()">x</div><span class="dim">Year:</span> <b>${year}</b><br><span class="dim">Full-bloom date:</span> <b>${data[0].month} ${data[0].day}</b><br><br>${annotation[i].comment}`
 				);
 		},
 		exit: function (el) {
@@ -390,8 +424,8 @@ function interactive() {
 					x = xScale(data[0].date_doy);
 				} else {
 					x =
-						data[0].year > 1000
-							? xScale(data[0].date_doy)
+						prevData[0].year > 1000
+							? xScale(prevData[0].date_doy)
 							: xScale(84);
 				}
 
@@ -406,19 +440,31 @@ function interactive() {
 					)
 					.style("visibility", "visible")
 					.html(
-						`<div class="x-closing" onclick="hideAnnotation()">x</div><span class="dim">Year:</span> <b>${prevYear}</b><br><span class="dim">Full-bloom date:</span> <b>${
-							prevData[0].month
-						} ${
-							prevData[0].day
-						}</b><br><span class="dim">Temperature:</span> <b>${
-							prevData[0].tempF
-						} (F)</b><br><span class="dim">Source:</span> <b>${
-							prevData[0].source
-						}</b><br><br><br>${annotation[i - 1].comment}`
+						windowW > 576
+							? `<div class="x-closing" onclick="hideAnnotation()">x</div><span class="dim">Year:</span> <b>${prevYear}</b><br><span class="dim">Full-bloom date:</span> <b>${
+									prevData[0].month
+							  } ${
+									prevData[0].day
+							  }</b><br><span class="dim">Temperature:</span> <b>${
+									prevData[0].tempF
+							  } (F)</b><br><span class="dim">Source:</span> <b>${
+									prevData[0].source
+							  }</b><br><br><br>${
+									i !== 8
+										? annotation[i - 1].comment
+										: annotation[4].comment
+							  }`
+							: `<div class="x-closing" onclick="hideAnnotation()">x</div><span class="dim">Year:</span> <b>${prevYear}</b><br><span class="dim">Full-bloom date:</span> <b>${
+									prevData[0].month
+							  } ${prevData[0].day}</b><br><br>${
+									i !== 8
+										? annotation[i - 1].comment
+										: annotation[4].comment
+							  }`
 					);
 			}
 		},
-		offset: 0.3,
+		offset: annotationOffset,
 	});
 
 	// SHOW ANNOTATION LINES
@@ -460,10 +506,11 @@ function interactive() {
 					.html(`${annotation[i].comment}`);
 			}
 		},
-		offset: 0.3,
+		offset: annotationOffset,
 	});
 
-	let offsetVal = 0.7 + 50 / windowH;
+	let formHistogramOffset =
+		windowW > 576 ? 0.7 + 50 / windowH : 0.7 + 50 / windowH - 180 / windowH;
 
 	// FORM HISTOGRAM
 	enterView({
@@ -516,26 +563,28 @@ function interactive() {
 				}
 			}
 		},
-		offset: offsetVal,
+		offset: formHistogramOffset,
 	});
 
 	// SHOW FINAL COUNTS
-	enterView({
-		selector: ".scrollButtonCenter",
-		enter: function (el) {
-			d3.selectAll(".count")
-				.transition()
-				.duration(1000)
-				.style("opacity", 1);
-			d3.select(".histogram-title-text").text(
-				`Full-bloom date (812-2021)`
-			);
-		},
-		exit: function (el) {
-			d3.selectAll(".count").style("opacity", 0);
-		},
-		offset: 0.8,
-	});
+	if (windowW > 576) {
+		enterView({
+			selector: ".scrollButtonCenter",
+			enter: function (el) {
+				d3.selectAll(".count")
+					.transition()
+					.duration(1000)
+					.style("opacity", 1);
+				d3.select(".histogram-title-text").text(
+					`Full-bloom date (812-2021)`
+				);
+			},
+			exit: function (el) {
+				d3.selectAll(".count").style("opacity", 0);
+			},
+			offset: 0.8,
+		});
+	}
 }
 
 // HIDE ANNOTATIONS
