@@ -466,7 +466,8 @@ div.scrollButtonCenter {
 		z-index: 99;
 	}
 
-	#draggable-line {
+	#draggable-line,
+	.desktop-only {
 		display: none;
 	}
 
@@ -509,6 +510,7 @@ div.scrollButtonCenter {
 
 	.step {
 		width: unset;
+		padding: 0 2rem;
 	}
 
 	.scatterplot-annotation__line {
