@@ -197,7 +197,15 @@ function interactive() {
 				.attr("fill-opacity", 1)
 				.attr("stroke-width", 3)
 				.attr("stroke", "black");
-			let x = xScale(d.date_doy);
+			let x;
+			if (windowW > 576) {
+				x =
+					d.date_doy < 105
+						? xScale(d.date_doy) + 10
+						: xScale(d.date_doy) - 230;
+			} else {
+				x = (windowW - margin.l) / 2 - 110 + margin.l;
+			}
 			let isAfter1900Visible = d3
 				.select(".after1900")
 				.classed("after1900-active");
@@ -214,10 +222,7 @@ function interactive() {
 			}
 			d3.select(".histogram-tooltip")
 				.style("top", `${y + 10}px`)
-				.style(
-					"left",
-					d.date_doy < 105 ? `${x + 10}px` : `${x - 230}px`
-				)
+				.style("left", `${x}px`)
 				.style("visibility", "visible")
 				.html(
 					`<span class="dim">Year:</span> <b>${d.year}</b><br><span class="dim">Full-bloom date:</span> <b>${d.month} ${d.day}</b><br><span class="dim">Temperature:</span> <b>${d.tempF} (F)</b><br><span class="dim">Source:</span> <b>${d.source}</b><br>`
@@ -245,14 +250,19 @@ function interactive() {
 				.attr("fill-opacity", 1)
 				.attr("stroke-width", 3)
 				.attr("stroke", "black");
-			let x = xScale(d.date_doy);
+			let x;
+			if (windowW > 576) {
+				x =
+					d.date_doy < 105
+						? xScale(d.date_doy) + 10
+						: xScale(d.date_doy) - 230;
+			} else {
+				x = (windowW - margin.l) / 2 - 110 + margin.l;
+			}
 			let y = yScaleScatterplot(d.year);
 			d3.select(".scatterplot-tooltip")
 				.style("top", `${y + 10}px`)
-				.style(
-					"left",
-					d.date_doy < 105 ? `${x + 10}px` : `${x - 230}px`
-				)
+				.style("left", `${x}px`)
 				.style("visibility", "visible")
 				.html(
 					`<span class="dim">Year:</span> <b>${d.year}</b><br><span class="dim">Full-bloom date:</span> <b>${d.month} ${d.day}</b><br><span class="dim">Temperature:</span> <b>${d.tempF} (F)</b><br><span class="dim">Source:</span> <b>${d.source}</b><br>`
@@ -335,7 +345,12 @@ function interactive() {
 				.attr("stroke-width", 3)
 				.attr("stroke", "black");
 
-			let x = xScale(data[0].date_doy);
+			let x;
+			if (windowW > 576) {
+				x = xScale(data[0].date_doy);
+			} else {
+				x = data[0].year > 1000 ? xScale(data[0].date_doy) : xScale(84);
+			}
 			let y = yScaleScatterplot(year);
 			let i = annotation.findIndex((el) => el.year === year);
 			d3.select(".scatterplot-annotation__point")
@@ -355,6 +370,7 @@ function interactive() {
 				.attr("stroke-width", 0.5)
 				.attr("stroke", "#ccc");
 			let year = +el.getAttribute("id").slice(12);
+			let data = d3.select(el).data();
 			let i = annotation.findIndex((el) => el.year === year);
 			if (i === 0) {
 				d3.select(".scatterplot-annotation__point").style(
@@ -369,7 +385,16 @@ function interactive() {
 					.attr("stroke-width", 3)
 					.attr("stroke", "black");
 				let prevData = prevPetal.data();
-				let x = xScale(prevData[0].date_doy);
+				let x;
+				if (windowW > 576) {
+					x = xScale(data[0].date_doy);
+				} else {
+					x =
+						data[0].year > 1000
+							? xScale(data[0].date_doy)
+							: xScale(84);
+				}
+
 				let y = yScaleScatterplot(prevYear);
 				d3.select(".scatterplot-annotation__point")
 					.style("top", `${y + 10}px`)
@@ -464,13 +489,6 @@ function interactive() {
 						.attr("y2", yScaleSub(id));
 				}
 			}
-			// if (id > 902) {
-			// 	let avg = el.__data__.doy_100yr;
-			// 	avgLine
-			// 		.select("line")
-			// 		.attr("x1", xScale(avg))
-			// 		.attr("x2", xScale(avg));
-			// }
 		},
 		exit: function (el) {
 			let id = el.children[0].getAttribute("id").slice(12);

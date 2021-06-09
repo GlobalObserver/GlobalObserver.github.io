@@ -87,6 +87,34 @@ article {
 	line-height: 1.6;
 }
 
+@media (max-width: 576px) {
+	#title {
+		flex-direction: column;
+		height: unset;
+	}
+
+	#title > * {
+		width: 100%;
+	}
+
+	#title-chart {
+		height: 500px;
+		margin-top: 2em;
+	}
+
+	#title-headline {
+		padding: 1em;
+	}
+
+	#title-headline > a {
+		display: none;
+	}
+
+	.explanation__step:first-of-type {
+		display: none;
+	}
+}
+
 #kyoto1200 {
 	display: flex;
 	position: relative;
@@ -404,7 +432,7 @@ div.scrollButtonCenter {
 	}
 
 	#kyoto1200 {
-		display: block;
+		flex-direction: column;
 	}
 
 	#main {
@@ -412,26 +440,40 @@ div.scrollButtonCenter {
 	}
 
 	#sub {
-		height: 95px;
-		width: 100px;
+		height: 180px;
+		width: 100%;
 		position: sticky;
 		top: 0;
-		left: calc(100vw - 100px);
+		left: 0;
 		z-index: 99;
 	}
 
-	.container-sub {
-		transform: scale(0.5);
+	#sub-chart {
+		display: none;
 	}
 
-	.legendTitle,
-	.angle-legend-title {
-		font-size: 0.9em;
+	#sub-legend {
+		display: flex;
+		padding: 0.5em 1em;
 	}
 
-	.label,
-	.angle-legend-label {
-		font-size: 16px;
+	.color-legend,
+	.angle-legend {
+		display: inline;
+	}
+
+	.color-legend-img,
+	.color-legend-ticks {
+		width: 80%;
+	}
+
+	.angle-legend-img {
+		height: auto;
+		width: 50%;
+	}
+
+	#kyoto1200__histogram {
+		top: 180px;
 	}
 
 	.count {
@@ -445,11 +487,33 @@ div.scrollButtonCenter {
 	article {
 		margin: 7em auto;
 	}
+
+	.step {
+		width: unset;
+	}
+
+	.scatterplot-annotation__line {
+		background: rgba(255, 255, 255, 0.3);
+	}
 }
 
 /* FOOTER */
 #footer {
 	width: 50%;
 	margin: 3em auto;
-	text-align: center;
+}
+
+#footer p {
+	font-size: 14px;
+}
+
+#footer a,
+#footer a:visited {
+	color: var(--font-gray);
+	text-decoration: underline;
+}
+
+#footer a:hover {
+	color: var(--yellow);
+	transition: all 0.4s ease;
 }

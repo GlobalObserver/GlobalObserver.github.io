@@ -1,7 +1,10 @@
 let windowH = window.innerHeight;
 let windowW = window.innerWidth;
 
-const margin = { t: 25, r: 25, b: 50, l: 75 };
+const margin =
+	windowW > 576
+		? { t: 25, r: 25, b: 50, l: 75 }
+		: { t: 25, r: 25, b: 50, l: 50 };
 const size = {
 	w:
 		Math.floor(
@@ -12,14 +15,14 @@ const size = {
 
 const sizeTitleChart = {
 	w: Math.floor(document.querySelector("#title-chart").clientWidth) - 1,
-	h: Math.floor(document.querySelector("#title-chart").clientHeight) - 1,
+	h: Math.floor(document.querySelector("#title-chart").clientHeight),
 };
 
 const sizeSub = {
 	w: Math.floor(document.querySelector("#sub-chart").clientWidth) - 1,
 	h: Math.floor(document.querySelector("#sub-chart").clientHeight) - 1,
 };
-let petalSize = windowW > 576 ? windowW / 1425 : 0.5;
+let petalSize = windowW > 576 ? windowW / 1425 : 0.8;
 
 const svgTitle = d3
 	.select("#title-chart")
@@ -32,6 +35,8 @@ const svgSub = d3
 	.append("svg")
 	.attr("width", sizeSub.w)
 	.attr("height", sizeSub.h);
+
+const containerSubG = svgSub.append("g").classed("container-sub", true);
 
 const svgH = d3
 	.select("#kyoto1200__histogram")
@@ -46,7 +51,6 @@ const svgS = d3
 	.attr("height", size.h);
 
 const containerTitleG = svgTitle.append("g").classed("container-title", true);
-const containerSubG = svgSub.append("g").classed("container-sub", true);
 const containerHG = svgH
 	.append("g")
 	.classed("container-histogram sub sub-3", true);
@@ -358,8 +362,8 @@ function draw() {
 		.classed("axis-label", true)
 		.attr(
 			"transform",
-			`rotate(-90) translate(${-(windowH * 0.3) / 2} ${
-				margin.l / 2 + 10
+			`rotate(-90) translate(${-(windowH * 0.3) / 2}, ${
+				windowW > 576 ? margin.l / 2 + 10 : margin.l / 2
 			})`
 		)
 		.append("text")
@@ -544,7 +548,12 @@ function draw() {
 	containerHAfter1900G
 		.append("text")
 		.classed("x-axis-label", true)
-		.attr("transform", `translate(${size.w - 20}, ${windowH * 0.3 - 20})`)
+		.attr(
+			"transform",
+			`translate(${size.w - 20}, ${
+				windowW > 576 ? margin.l / 2 + 10 : margin.l / 2
+			})`
+		)
 		.text("(days after Jan. 1)");
 
 	containerHAfter1900G
