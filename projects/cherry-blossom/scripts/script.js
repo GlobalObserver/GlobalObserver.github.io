@@ -485,9 +485,7 @@ function draw() {
 		.classed("median-text", true)
 		.attr(
 			"transform",
-			`translate(${
-				windowW > 576 ? xScale(99) : xScale(98)
-			}, ${yScaleHistogramAfter1900(11)})`
+			`translate(${xScale(98)}, ${yScaleHistogramAfter1900(11)})`
 		)
 		.append("text")
 		.text("Median: 98 days");
