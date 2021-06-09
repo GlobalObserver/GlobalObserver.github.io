@@ -42,7 +42,7 @@ const svgH = d3
 	.select("#kyoto1200__histogram")
 	.append("svg")
 	.attr("width", size.w)
-	.attr("height", windowH * 0.6);
+	.attr("height", windowH * 0.3);
 
 const svgS = d3
 	.select("#kyoto1200__scatterplot")
@@ -489,9 +489,12 @@ function draw() {
 	medianLineAfter1900
 		.append("rect")
 		.attr("x", xScale(97.5))
-		.attr("y", margin.t + 35)
+		.attr("y", yScaleHistogramAfter1900(11))
 		.attr("width", xScale(98.5) - xScale(97.5))
-		.attr("height", windowH * 0.3 - margin.t - 75)
+		.attr(
+			"height",
+			yScaleHistogramAfter1900(1) - yScaleHistogramAfter1900(13)
+		)
 		.attr("fill", "none")
 		.attr("stroke", "#ffbf00")
 		.attr("stroke-width", 3);
@@ -499,7 +502,10 @@ function draw() {
 	medianLineAfter1900
 		.append("g")
 		.classed("median-text", true)
-		.attr("transform", `translate(${xScale(99)}, ${margin.t + 40})`)
+		.attr(
+			"transform",
+			`translate(${xScale(99)}, ${yScaleHistogramAfter1900(11)})`
+		)
 		.append("text")
 		.text("Median: 98 days");
 
@@ -508,9 +514,12 @@ function draw() {
 	line2021
 		.append("rect")
 		.attr("x", xScale(83.5))
-		.attr("y", windowH * 0.3 - margin.b - 20)
+		.attr("y", yScaleHistogramAfter1900(2))
 		.attr("width", xScale(84.5) - xScale(83.5))
-		.attr("height", 30)
+		.attr(
+			"height",
+			yScaleHistogramAfter1900(1) - yScaleHistogramAfter1900(4)
+		)
 		.attr("fill", "none")
 		.attr("stroke", "#ffbf00")
 		.attr("stroke-width", 3);
@@ -520,7 +529,7 @@ function draw() {
 		.classed("median-text", true)
 		.attr(
 			"transform",
-			`translate(${xScale(83.5)}, ${windowH * 0.3 - margin.b - 30})`
+			`translate(${xScale(83.5)}, ${yScaleHistogramAfter1900(3)})`
 		)
 		.append("text")
 		.text("2021: 84 days");
@@ -548,12 +557,7 @@ function draw() {
 	containerHAfter1900G
 		.append("text")
 		.classed("x-axis-label", true)
-		.attr(
-			"transform",
-			`translate(${size.w - 20}, ${
-				windowW > 576 ? margin.l / 2 + 10 : margin.l / 2
-			})`
-		)
+		.attr("transform", `translate(${size.w - 20}, ${windowH * 0.3 - 20})`)
 		.text("(days after Jan. 1)");
 
 	containerHAfter1900G
@@ -651,7 +655,7 @@ function draw() {
 		.append("div")
 		.classed("scrollButton scrollButtonCenter", true)
 		.append("a")
-		.attr("href", "#tile");
+		.attr("href", "#analysis");
 
 	scrollButton.append("span");
 	scrollButton.append("span");

@@ -82,6 +82,7 @@ function scrolly() {
 					.text("Full-bloom date (812-1899)");
 
 				d3.select("#kyoto1200__histogram").style("height", "60vh");
+				svgH.attr("height", windowH * 0.6);
 				d3.selectAll(".after1900").classed("after1900-active", true);
 
 				histogramPetalG
@@ -123,13 +124,6 @@ function scrolly() {
 			if (index === 0) {
 				d3.select(".median-line").style("opacity", 0);
 			} else if (index === 1) {
-				containerHG
-					.selectAll(".modern")
-					.transition()
-					.duration(1000)
-					.style("opacity", 1)
-					.style("pointer-events", "auto");
-
 				containerHG
 					.selectAll(".count")
 					.transition()
@@ -175,7 +169,13 @@ function scrolly() {
 					.selectAll(".after1900")
 					.classed("after1900-active", false);
 
-				d3.select("#kyoto1200__histogram").style("height", "30vh");
+				svgH.transition()
+					.duration(1500)
+					.attr("height", windowH * 0.3);
+				d3.select("#kyoto1200__histogram")
+					.transition()
+					.duration(1500)
+					.style("height", "30vh");
 			} else if (index === 2) {
 				containerHG
 					.selectAll(".line-2021")
