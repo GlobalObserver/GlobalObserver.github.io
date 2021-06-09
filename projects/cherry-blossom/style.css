@@ -519,6 +519,10 @@ div.scrollButtonCenter {
 	.analysis__step:first-of-type {
 		min-height: unset;
 	}
+
+	div.scrollButtonCenter {
+		transform: translate(-51px, 300%);
+	}
 }
 
 /* FOOTER */
