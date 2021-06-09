@@ -421,7 +421,7 @@ function interactive() {
 				let prevData = prevPetal.data();
 				let x;
 				if (windowW > 576) {
-					x = xScale(data[0].date_doy);
+					x = xScale(prevData[0].date_doy);
 				} else {
 					x =
 						prevData[0].year > 1000
