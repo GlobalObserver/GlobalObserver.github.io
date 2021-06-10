@@ -87,7 +87,7 @@ article {
 	line-height: 1.6;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 800px) {
 	#title {
 		flex-direction: column;
 		height: unset;
@@ -426,7 +426,7 @@ div.scrollButtonCenter {
 	text-align: center;
 }
 
-@media (max-width: 576px) {
+@media (max-width: 800px) {
 	h1 {
 		font-size: 2em;
 	}

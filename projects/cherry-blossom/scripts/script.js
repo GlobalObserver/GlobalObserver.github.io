@@ -2,7 +2,7 @@ let windowH = window.innerHeight;
 let windowW = window.innerWidth;
 
 const margin =
-	windowW > 576
+	windowW > 800
 		? { t: 25, r: 25, b: 50, l: 75 }
 		: { t: 25, r: 25, b: 50, l: 50 };
 const size = {
@@ -22,12 +22,12 @@ const sizeSub = {
 	w: document.querySelector("#sub-chart").clientWidth,
 	h: document.querySelector("#sub-chart").clientHeight,
 };
-let petalSize = windowW > 576 ? windowW / 1425 : 0.6;
+let petalSize = windowW > 800 ? windowW / 1425 : 0.6;
 
 const svgTitle = d3
 	.select("#title-chart")
 	.append("svg")
-	.attr("width", windowW > 576 ? sizeTitleChart.w + 20 : sizeTitleChart.w)
+	.attr("width", windowW > 800 ? sizeTitleChart.w + 20 : sizeTitleChart.w)
 	.attr("height", sizeTitleChart.h);
 
 const svgSub = d3
@@ -127,8 +127,8 @@ function draw() {
 		.scaleLinear()
 		.domain([83, 125])
 		.range([
-			windowW > 576 ? 20 : 0,
-			windowW > 576 ? sizeTitleChart.w + 20 : sizeTitleChart.w,
+			windowW > 800 ? 20 : 0,
+			windowW > 800 ? sizeTitleChart.w + 20 : sizeTitleChart.w,
 		]);
 
 	xScaleSub = d3
@@ -136,7 +136,7 @@ function draw() {
 		.domain([83, 125])
 		.range([
 			margin.l,
-			windowW > 576 ? windowW * 0.3 - margin.r * 2 : sizeSub.w - margin.r,
+			windowW > 800 ? windowW * 0.3 - margin.r * 2 : sizeSub.w - margin.r,
 		]);
 
 	yScaleTitle = d3
@@ -210,7 +210,7 @@ function draw() {
 	colorLegendG
 		.append("text")
 		.classed("color-legend-title", true)
-		.attr("transform", `translate(${windowW > 576 ? 30 : 20}, 30)`)
+		.attr("transform", `translate(${windowW > 800 ? 30 : 20}, 30)`)
 		.text("Year");
 
 	colorLegendG
@@ -243,7 +243,7 @@ function draw() {
 		.classed("angle-legend-title", true)
 		.attr(
 			"transform",
-			`translate(${windowW > 576 ? 30 : 20}, ${windowW > 576 ? 100 : 80})`
+			`translate(${windowW > 800 ? 30 : 20}, ${windowW > 800 ? 100 : 80})`
 		)
 		.text(
 			windowW > 650
@@ -292,7 +292,7 @@ function draw() {
 		.attr(
 			"transform",
 			`rotate(-90) translate(${-sizeSub.h / 2}, ${
-				windowW > 576 ? margin.l / 2 : 15
+				windowW > 800 ? margin.l / 2 : 15
 			})`
 		)
 		.append("text")
@@ -310,7 +310,7 @@ function draw() {
 				`translate(${xScaleSub(d.date_doy)}, ${yScaleSub(
 					d.year
 				)}) rotate(${angleScale(d.tempC)}) scale(${
-					windowW > 576 ? 0.5 * petalSize : 0.8 * petalSize
+					windowW > 800 ? 0.5 * petalSize : 0.8 * petalSize
 				})`
 		);
 
@@ -369,7 +369,7 @@ function draw() {
 		.attr(
 			"transform",
 			`rotate(-90) translate(${-(windowH * 0.3) / 2}, ${
-				windowW > 576 ? margin.l / 2 + 10 : margin.l / 2
+				windowW > 800 ? margin.l / 2 + 10 : margin.l / 2
 			})`
 		)
 		.append("text")
@@ -414,11 +414,11 @@ function draw() {
 	medianLine
 		.append("rect")
 		.attr("x", xScale(103.5))
-		.attr("y", windowW > 576 ? margin.t : margin.t + 10)
+		.attr("y", windowW > 800 ? margin.t : margin.t + 10)
 		.attr("width", xScale(104.5) - xScale(103.5))
 		.attr(
 			"height",
-			windowW > 576
+			windowW > 800
 				? windowH * 0.3 - margin.t - 35
 				: windowH * 0.3 - margin.t - 45
 		)
@@ -432,7 +432,7 @@ function draw() {
 		.attr(
 			"transform",
 			`translate(${xScale(105)}, ${
-				windowW > 576 ? margin.t + 5 : margin.t + 20
+				windowW > 800 ? margin.t + 5 : margin.t + 20
 			})`
 		)
 		.append("text")
@@ -513,7 +513,7 @@ function draw() {
 			`translate(${xScale(83.5)}, ${yScaleHistogramAfter1900(3)})`
 		)
 		.append("text")
-		.text(windowW > 576 ? "2021: 84 days" : "2021");
+		.text(windowW > 800 ? "2021: 84 days" : "2021");
 
 	containerHAfter1900G
 		.append("g")
@@ -594,7 +594,7 @@ function draw() {
 	containerSG
 		.append("g")
 		.classed("y-axis-s", true)
-		.attr("transform", `translate(${windowW > 576 ? 100 : 70}, 0)`)
+		.attr("transform", `translate(${windowW > 800 ? 100 : 70}, 0)`)
 		.call(yAxisS);
 
 	let horizontalLineS = [
@@ -701,7 +701,7 @@ function draw() {
 
 // 	size.w = document.querySelector("#kyoto1200__scatterplot").clientWidth - 5;
 
-// 	petalSize = windowW > 576 ? windowW / 1425 : 0.5;
+// 	petalSize = windowW > 800 ? windowW / 1425 : 0.5;
 
 // 	svgSub
 // 		.attr("width", document.querySelector("#sub").clientWidth)

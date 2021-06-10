@@ -1,6 +1,6 @@
 function scrolly() {
 	// INTRO EXPLANATION
-	let introOffset = windowW > 576 ? 0.5 : 0.3;
+	let introOffset = windowW > 800 ? 0.5 : 0.3;
 	enterView({
 		selector: "div.explanation__step",
 		enter: (el) => {
@@ -12,7 +12,7 @@ function scrolly() {
 			if (index === 4) {
 				d3.selectAll("g.sub").style("opacity", 1);
 			}
-			if (windowW <= 576) {
+			if (windowW <= 800) {
 				if (index === 1) {
 					d3.select("#sub-chart")
 						.transition()
@@ -30,7 +30,7 @@ function scrolly() {
 			);
 			d3.selectAll("g.sub").style("opacity", 0.1);
 			d3.select(`g.sub-${index - 1}`).style("opacity", 1);
-			if (windowW <= 576) {
+			if (windowW <= 800) {
 				if (index === 1) {
 					d3.select("#sub-chart")
 						.transition()
@@ -56,7 +56,7 @@ function scrolly() {
 					.transition()
 					.duration(1000)
 					.style("opacity", 1);
-				if (windowW <= 576) {
+				if (windowW <= 800) {
 					d3.select("#kyoto1200__histogram")
 						.transition()
 						.duration(1000)
@@ -147,7 +147,7 @@ function scrolly() {
 			const histogramPetalG = containerHG.selectAll(".histogram-petal");
 			if (index === 0) {
 				d3.select(".median-line").style("opacity", 0);
-				if (windowW <= 576) {
+				if (windowW <= 800) {
 					d3.select("#kyoto1200__histogram")
 						.transition()
 						.duration(1000)
@@ -230,7 +230,7 @@ function interactive() {
 				.attr("stroke-width", 3)
 				.attr("stroke", "black");
 			let x;
-			if (windowW > 576) {
+			if (windowW > 800) {
 				x =
 					d.date_doy < 105
 						? xScale(d.date_doy) + 10
@@ -283,7 +283,7 @@ function interactive() {
 				.attr("stroke-width", 3)
 				.attr("stroke", "black");
 			let x;
-			if (windowW > 576) {
+			if (windowW > 800) {
 				x =
 					d.date_doy < 105
 						? xScale(d.date_doy) + 10
@@ -314,7 +314,7 @@ function interactive() {
 		});
 
 	// DRAGGABLE LINE
-	if (windowW > 576) {
+	if (windowW > 800) {
 		draggableLine.call(
 			d3
 				.drag()
@@ -360,7 +360,7 @@ function interactive() {
 		let thisPetal = d3.select(`use#scatterplot-${year}`);
 		thisPetal.classed("toAnnotate", true);
 	});
-	let annotationOffset = windowW > 576 ? 0.3 : 0.1;
+	let annotationOffset = windowW > 800 ? 0.3 : 0.1;
 	// SHOW ANNOTATION POINTS
 	enterView({
 		selector: ".toAnnotate",
@@ -378,7 +378,7 @@ function interactive() {
 				.attr("stroke", "black");
 
 			let x;
-			if (windowW > 576) {
+			if (windowW > 800) {
 				x = xScale(data[0].date_doy);
 			} else {
 				x = data[0].year > 1000 ? xScale(data[0].date_doy) : xScale(84);
@@ -393,7 +393,7 @@ function interactive() {
 				)
 				.style("visibility", "visible")
 				.html(
-					windowW > 576
+					windowW > 800
 						? `<div class="x-closing" onclick="hideAnnotation()">x</div><span class="dim">Year:</span> <b>${year}</b><br><span class="dim">Full-bloom date:</span> <b>${data[0].month} ${data[0].day}</b><br><span class="dim">Temperature:</span> <b>${data[0].tempF} (F)</b><br><span class="dim">Source:</span> <b>${data[0].source}</b><br><br><br>${annotation[i].comment}`
 						: `<div class="x-closing" onclick="hideAnnotation()">x</div><span class="dim">Year:</span> <b>${year}</b><br><span class="dim">Full-bloom date:</span> <b>${data[0].month} ${data[0].day}</b><br><br>${annotation[i].comment}`
 				);
@@ -420,7 +420,7 @@ function interactive() {
 					.attr("stroke", "black");
 				let prevData = prevPetal.data();
 				let x;
-				if (windowW > 576) {
+				if (windowW > 800) {
 					x = xScale(prevData[0].date_doy);
 				} else {
 					x =
@@ -440,7 +440,7 @@ function interactive() {
 					)
 					.style("visibility", "visible")
 					.html(
-						windowW > 576
+						windowW > 800
 							? `<div class="x-closing" onclick="hideAnnotation()">x</div><span class="dim">Year:</span> <b>${prevYear}</b><br><span class="dim">Full-bloom date:</span> <b>${
 									prevData[0].month
 							  } ${
@@ -510,7 +510,7 @@ function interactive() {
 	});
 
 	let formHistogramOffset =
-		windowW > 576 ? 0.7 + 50 / windowH : 0.7 + 50 / windowH - 180 / windowH;
+		windowW > 800 ? 0.7 + 50 / windowH : 0.7 + 50 / windowH - 180 / windowH;
 
 	// FORM HISTOGRAM
 	enterView({
@@ -526,7 +526,7 @@ function interactive() {
 			d3.select(".histogram-title-text").text(
 				`Full-bloom date (812-${id})`
 			);
-			if (windowW > 576) {
+			if (windowW > 800) {
 				if (draggableLine.classed("dragged")) {
 					return;
 				} else {
@@ -552,7 +552,7 @@ function interactive() {
 					`Full-bloom date (812-${id})`
 				);
 			}
-			if (windowW > 576) {
+			if (windowW > 800) {
 				if (draggableLine.classed("dragged")) {
 					return;
 				} else {
@@ -567,7 +567,7 @@ function interactive() {
 	});
 
 	// SHOW FINAL COUNTS
-	if (windowW > 576) {
+	if (windowW > 800) {
 		enterView({
 			selector: ".scrollButtonCenter",
 			enter: function (el) {
