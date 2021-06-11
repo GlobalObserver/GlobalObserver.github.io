@@ -144,11 +144,11 @@ function draw() {
 	yScaleTitle = d3
 		.scaleLinear()
 		.domain([800, 2030])
-		.range([10, sizeTitleChart.h - 10]);
+		.range([10, sizeTitleChart.h - 20]);
 
 	yScaleSub = d3
 		.scaleLinear()
-		.domain([800, 2030])
+		.domain([800, 2050])
 		.range([margin.t, sizeSub.h - margin.b]);
 
 	yScaleHistogram = d3
@@ -187,7 +187,9 @@ function draw() {
 			(d) =>
 				`translate(${xScaleTitle(d.date_doy)}, ${yScaleTitle(
 					d.year
-				)}) rotate(${angleScale(d.tempC)}) scale(${petalSize})`
+				)}) rotate(${angleScale(d.tempC)}, ${transformOriginSize.x}, ${
+					transformOriginSize.y
+				}) scale(${petalSize})`
 		);
 
 	petalTitleG
@@ -311,7 +313,9 @@ function draw() {
 			(d) =>
 				`translate(${xScaleSub(d.date_doy)}, ${yScaleSub(
 					d.year
-				)}) rotate(${angleScale(d.tempC)}) scale(${
+				)}) rotate(${angleScale(d.tempC)}, ${
+					windowW > 800 ? 3.27 : 2.925
+				}, ${windowW > 800 ? 4.61 : 4.265}) scale(${
 					windowW > 800 ? 0.5 * petalSize : 0.8 * petalSize
 				})`
 		);
