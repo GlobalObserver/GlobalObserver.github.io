@@ -239,10 +239,10 @@ img.angle-legend-img {
 	text-shadow: 2px 2px white;
 }
 
-.angle-legend-petal,
 .scatterplot-petal,
 .histogram-petal {
 	transform-box: fill-box;
+	-webkit-transform-origin: 50% 50%;
 	transform-origin: center;
 }
 
