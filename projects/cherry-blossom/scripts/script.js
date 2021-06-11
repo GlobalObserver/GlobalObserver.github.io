@@ -23,8 +23,10 @@ const sizeSub = {
 	h: document.querySelector("#sub-chart").clientHeight,
 };
 let petalSize = windowW > 800 ? windowW / 1425 : 0.6;
-let transformOriginSize =
-	windowW > 800 ? { x: 6.16, y: 8.975 } : { x: 3.655, y: 5.33 };
+let transformOriginSize = {
+	x: (12.19 * petalSize) / 2,
+	y: (17.77 * petalSize) / 2,
+};
 
 const svgTitle = d3
 	.select("#title-chart")
