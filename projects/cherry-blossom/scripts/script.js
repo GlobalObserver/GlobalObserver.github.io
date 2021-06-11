@@ -23,6 +23,8 @@ const sizeSub = {
 	h: document.querySelector("#sub-chart").clientHeight,
 };
 let petalSize = windowW > 800 ? windowW / 1425 : 0.6;
+let transformOriginSize =
+	windowW > 800 ? { x: 6.16, y: 8.975 } : { x: 3.655, y: 5.33 };
 
 const svgTitle = d3
 	.select("#title-chart")
@@ -565,7 +567,9 @@ function draw() {
 			(d) =>
 				`translate(${xScale(d.date_doy) - 5.7}, ${
 					yScaleHistogram(d.count) - 8.63
-				}) rotate(${angleScale(d.tempC)}) scale(${petalSize})`
+				}) rotate(${angleScale(d.tempC)}, ${transformOriginSize.x}, ${
+					transformOriginSize.y
+				}) scale(${petalSize})`
 		);
 
 	histogramG

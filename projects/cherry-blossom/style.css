@@ -239,12 +239,12 @@ img.angle-legend-img {
 	text-shadow: 2px 2px white;
 }
 
-.scatterplot-petal,
+/* .scatterplot-petal,
 .histogram-petal {
 	transform-box: fill-box;
 	-webkit-transform-origin: 50% 50%;
 	transform-origin: center;
-}
+} */
 
 .histogram-petal {
 	display: none;

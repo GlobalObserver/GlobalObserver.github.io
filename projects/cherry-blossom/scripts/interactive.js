@@ -95,9 +95,11 @@ function scrolly() {
 							(d) =>
 								`translate(${xScale(d.date_doy) - 5.7}, ${
 									yScaleHistogram(d.count) - 8.63
-								}) rotate(${angleScale(
-									d.tempC
-								)}) scale(${petalSize})`
+								}) rotate(${angleScale(d.tempC)}, ${
+									transformOriginSize.x
+								}, ${
+									transformOriginSize.y
+								}) scale(${petalSize})`
 						);
 				});
 
@@ -123,9 +125,11 @@ function scrolly() {
 									5.7 +
 									windowH * 0.3 -
 									30
-								}) rotate(${angleScale(
-									d.tempC
-								)}) scale(${petalSize})`
+								}) rotate(${angleScale(d.tempC)}, ${
+									transformOriginSize.x
+								}, ${
+									transformOriginSize.y
+								}) scale(${petalSize})`
 						);
 					});
 			} else if (index === 2) {
@@ -187,9 +191,11 @@ function scrolly() {
 							(d) =>
 								`translate(${xScale(d.date_doy) - 5.7}, ${
 									yScaleHistogram(d.count) - 8.63
-								}) rotate(${angleScale(
-									d.tempC
-								)}) scale(${petalSize})`
+								}) rotate(${angleScale(d.tempC)}, ${
+									transformOriginSize.x
+								}, ${
+									transformOriginSize.y
+								}) scale(${petalSize})`
 						);
 				});
 
